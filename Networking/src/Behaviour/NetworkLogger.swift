@@ -41,7 +41,7 @@ public struct NetworkLogger: RequestBehaviour {
         print(logOutput)
     }
     
-    public func didReceive(_ result: Result<NetworkOperationResponse, NetworkError>, endPoint: EndPoint) {
+    public func didReceive(_ result: Result<NetworkOperationResponse, Error>, endPoint: EndPoint) {
         
         print("\n - - - - - - - - INCOMING RESPONSE- - - - - - - - \n")
         

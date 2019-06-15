@@ -46,7 +46,7 @@ public final class Networking: NetworkService{
                     
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy     = .convertFromSnakeCase
-                    decoder.dateDecodingStrategy    = .secondsSince1970
+                    decoder.dateDecodingStrategy    = .iso8601
                     let decodedObject = try decoder.decode(T.self, from: data)
                     completion(.success(decodedObject))
                 } catch let error as DecodingError{
