@@ -27,7 +27,6 @@
 		015574B922B5001A00A26DAD /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015574B822B5001A00A26DAD /* AppRouter.swift */; };
 		015574BC22B506CE00A26DAD /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015574BA22B506CE00A26DAD /* ContactDetailViewController.swift */; };
 		015574C122B506E900A26DAD /* ContactEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015574BF22B506E900A26DAD /* ContactEditViewController.swift */; };
-		015574C222B506E900A26DAD /* ContactEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015574C022B506E900A26DAD /* ContactEditViewController.xib */; };
 		015574C622B507AF00A26DAD /* ContactEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015574C522B507AF00A26DAD /* ContactEndPoint.swift */; };
 		015574CA22B50A8000A26DAD /* ContactListingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015574C822B50A8000A26DAD /* ContactListingTableViewCell.swift */; };
 		015574CB22B50A8000A26DAD /* ContactListingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015574C922B50A8000A26DAD /* ContactListingTableViewCell.xib */; };
@@ -49,6 +48,10 @@
 		0155750A22B5860300A26DAD /* UITableView+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155750922B5860300A26DAD /* UITableView+Defaults.swift */; };
 		0155750C22B5861400A26DAD /* UIView+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155750B22B5861400A26DAD /* UIView+Theme.swift */; };
 		0155750E22B58E0000A26DAD /* UIImageView+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155750D22B58E0000A26DAD /* UIImageView+Theme.swift */; };
+		0155751222B5A48A00A26DAD /* EditHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155751022B5A48A00A26DAD /* EditHeaderTableViewCell.swift */; };
+		0155751322B5A48A00A26DAD /* EditHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0155751122B5A48A00A26DAD /* EditHeaderTableViewCell.xib */; };
+		0155751622B5A4B400A26DAD /* EditMetadataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155751422B5A4B400A26DAD /* EditMetadataTableViewCell.swift */; };
+		0155751722B5A4B400A26DAD /* EditMetadataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0155751522B5A4B400A26DAD /* EditMetadataTableViewCell.xib */; };
 		0190FE2122AEC054002A302E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0190FE2022AEC054002A302E /* AppDelegate.swift */; };
 		0190FE2822AEC055002A302E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0190FE2722AEC055002A302E /* Assets.xcassets */; };
 		0190FE2B22AEC055002A302E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0190FE2922AEC055002A302E /* LaunchScreen.storyboard */; };
@@ -155,7 +158,6 @@
 		015574B822B5001A00A26DAD /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		015574BA22B506CE00A26DAD /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 		015574BF22B506E900A26DAD /* ContactEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEditViewController.swift; sourceTree = "<group>"; };
-		015574C022B506E900A26DAD /* ContactEditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactEditViewController.xib; sourceTree = "<group>"; };
 		015574C522B507AF00A26DAD /* ContactEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEndPoint.swift; sourceTree = "<group>"; };
 		015574C822B50A8000A26DAD /* ContactListingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListingTableViewCell.swift; sourceTree = "<group>"; };
 		015574C922B50A8000A26DAD /* ContactListingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactListingTableViewCell.xib; sourceTree = "<group>"; };
@@ -178,6 +180,10 @@
 		0155750922B5860300A26DAD /* UITableView+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Defaults.swift"; sourceTree = "<group>"; };
 		0155750B22B5861400A26DAD /* UIView+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Theme.swift"; sourceTree = "<group>"; };
 		0155750D22B58E0000A26DAD /* UIImageView+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Theme.swift"; sourceTree = "<group>"; };
+		0155751022B5A48A00A26DAD /* EditHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		0155751122B5A48A00A26DAD /* EditHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		0155751422B5A4B400A26DAD /* EditMetadataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMetadataTableViewCell.swift; sourceTree = "<group>"; };
+		0155751522B5A4B400A26DAD /* EditMetadataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditMetadataTableViewCell.xib; sourceTree = "<group>"; };
 		0190FE1D22AEC054002A302E /* ContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0190FE2022AEC054002A302E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0190FE2722AEC055002A302E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -368,8 +374,8 @@
 		015574BE22B506D400A26DAD /* ContactEdit */ = {
 			isa = PBXGroup;
 			children = (
+				0155750F22B5A46500A26DAD /* UITableViewCell */,
 				015574BF22B506E900A26DAD /* ContactEditViewController.swift */,
-				015574C022B506E900A26DAD /* ContactEditViewController.xib */,
 			);
 			path = ContactEdit;
 			sourceTree = "<group>";
@@ -472,6 +478,17 @@
 			children = (
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		0155750F22B5A46500A26DAD /* UITableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0155751022B5A48A00A26DAD /* EditHeaderTableViewCell.swift */,
+				0155751122B5A48A00A26DAD /* EditHeaderTableViewCell.xib */,
+				0155751422B5A4B400A26DAD /* EditMetadataTableViewCell.swift */,
+				0155751522B5A4B400A26DAD /* EditMetadataTableViewCell.xib */,
+			);
+			path = UITableViewCell;
 			sourceTree = "<group>";
 		};
 		0190FE1422AEC054002A302E = {
@@ -829,9 +846,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				015574C222B506E900A26DAD /* ContactEditViewController.xib in Resources */,
 				015574FF22B5389000A26DAD /* ContactMetadataTableViewCell.xib in Resources */,
 				0190FE2B22AEC055002A302E /* LaunchScreen.storyboard in Resources */,
+				0155751322B5A48A00A26DAD /* EditHeaderTableViewCell.xib in Resources */,
+				0155751722B5A4B400A26DAD /* EditMetadataTableViewCell.xib in Resources */,
 				015574CB22B50A8000A26DAD /* ContactListingTableViewCell.xib in Resources */,
 				0190FE2822AEC055002A302E /* Assets.xcassets in Resources */,
 				0155750322B538A500A26DAD /* ContactHeaderTableViewCell.xib in Resources */,
@@ -900,8 +918,10 @@
 				015574B922B5001A00A26DAD /* AppRouter.swift in Sources */,
 				015574B522B4FF5E00A26DAD /* ContactListingViewController.swift in Sources */,
 				0155750622B5801F00A26DAD /* UIColor+Theme.swift in Sources */,
+				0155751222B5A48A00A26DAD /* EditHeaderTableViewCell.swift in Sources */,
 				015574BC22B506CE00A26DAD /* ContactDetailViewController.swift in Sources */,
 				0155750822B5818C00A26DAD /* UIView+Gradient.swift in Sources */,
+				0155751622B5A4B400A26DAD /* EditMetadataTableViewCell.swift in Sources */,
 				0155750222B538A500A26DAD /* ContactHeaderTableViewCell.swift in Sources */,
 				0155750A22B5860300A26DAD /* UITableView+Defaults.swift in Sources */,
 				015574FA22B5296B00A26DAD /* UIImageView+Cache.swift in Sources */,

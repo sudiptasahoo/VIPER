@@ -13,7 +13,7 @@ extension UIImageView{
     
     static let BASE_URL = "https://gojek-contacts-app.herokuapp.com"
     
-    func setImage(_ path: String?, _ placeHolderImage: UIImage? = nil){
+    func setImage(_ path: String?, placeHolderImage: UIImage? = nil){
         
         guard let path = path else {
             self.ss_setImage(nil, placeHolderImage)

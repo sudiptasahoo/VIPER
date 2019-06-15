@@ -23,6 +23,11 @@ struct AppRouter{
     func routeToContactDetails(for contact: Contact){
         
         let contactDetailsVc = ContactDetailViewController(contact)
-        self.navController.pushViewController(contactDetailsVc, animated: true)
+        navController.pushViewController(contactDetailsVc, animated: true)
+    }
+    
+    func routeToEditContactDetails(for contact: Contact?, mode: ContactEditMode){
+        let contactDetailsVc = ContactEditViewController(contact, mode: mode)
+        navController.present(contactDetailsVc, animated: true, completion: nil)
     }
 }

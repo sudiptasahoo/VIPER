@@ -10,7 +10,7 @@ import UIKit
 import Networking
 
 final class ContactDetailViewController: UIViewController {
-
+    
     private(set) var contact: Contact!
     private var tableView: UITableView!
     
@@ -26,6 +26,7 @@ final class ContactDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScreen()
+        setupNavBar()
         
         Networking.shared.request(ContactEndPoint.getContact(contact.id)) {[weak self] (result: Result<Contact, Error>) in
             
@@ -58,6 +59,29 @@ final class ContactDetailViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    private func setupNavBar(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.done, target: self, action: #selector(ContactDetailViewController.editTapped))
+        
+    }
+    
+    @objc private func editTapped(){
+        AppRouter.shared.routeToEditContactDetails(for:contact, mode: .update)
+    }
+    
+    private func getNoOFRows() -> Int{
+        var rows = 1
+        
+        if let ph = contact.phoneNumber, !ph.isEmpty{
+            rows += 1
+        }
+        
+        if let email = contact.email, !email.isEmpty{
+            rows += 1
+        }
+        
+        return rows
+    }
 }
 
 extension ContactDetailViewController: UITableViewDelegate, UITableViewDataSource{
@@ -67,7 +91,7 @@ extension ContactDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return getNoOFRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

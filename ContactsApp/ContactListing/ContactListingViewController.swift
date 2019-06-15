@@ -31,7 +31,8 @@ final class ContactListingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScreen()
-
+        setupNavBar()
+        
         Networking.shared.request(ContactEndPoint.getContacts) {[weak self] (result: Result<[Contact], Error>) in
             
             switch result{
@@ -63,6 +64,15 @@ final class ContactListingViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func setupNavBar(){
+        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(ContactListingViewController.addTapped))
+        navigationItem.rightBarButtonItem = addItem
+    }
+    
+    @objc private func addTapped(){
+        AppRouter.shared.routeToEditContactDetails(for: nil, mode: .new)
     }
 }
 

@@ -8,7 +8,10 @@
 
 import UIKit
 
-enum MetadataType{
+enum MetadataType: Int, CaseIterable, RawRepresentable{
+    
+    case firstName
+    case lastName
     case phone
     case email
 }
@@ -34,6 +37,9 @@ final class ContactMetadataTableViewCell: UITableViewCell, NibReusable {
         case .email:
             titleLbl.text = "email"
             valueLbl.text = contact.email
+            
+        default:
+            fatalError("Only email and mobile is allowed on Details screen")
         }
         
     }
