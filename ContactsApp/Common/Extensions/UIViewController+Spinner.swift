@@ -34,4 +34,16 @@ extension UIViewController {
 //            vSpinner = nil
 //        }
 //    }
+    
+    func alert(with title: String?, message: String?, actionButtonTitle: String?){
+        
+        let alertController = UIAlertController(title: title ?? "", message: message ?? "", preferredStyle: .alert)
+        
+        if let buttonTitle = actionButtonTitle{
+            let okAction = UIAlertAction(title: buttonTitle, style: .default, handler: nil)
+            alertController.addAction(okAction)
+        }
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }

@@ -15,7 +15,9 @@ enum DetailSection: Int, CaseIterable, RawRepresentable{
 }
 
 enum MetadataDisplayType: Int, CaseIterable, RawRepresentable{
-    case header
+    case profileImage
+    case firstName
+    case lastName
     case phone
     case email
 }
@@ -32,6 +34,7 @@ protocol ContactDetailPresentation: class {
     func toggleFavorite()
     
     var contact: Contact! { get }
+    func routeToEditScreen()
 }
 
 class ContactDetailPresenter: ContactDetailPresentation {
@@ -102,7 +105,7 @@ class ContactDetailPresenter: ContactDetailPresentation {
         
         
         switch sectionType {
-        case .header: return .header
+        case .header: return .profileImage
         case .metadata:
             
             if indexPath.row == 0{
@@ -110,7 +113,7 @@ class ContactDetailPresenter: ContactDetailPresentation {
             } else if indexPath.row == 1{
                 return .email
             } else{
-                fatalError("Wrong section setup in ContactDetailPresenter")
+                fatalError("Invalid rows setup in getNoOfRows(for section: Int) -> Int")
             }
         }
     }
@@ -136,5 +139,9 @@ class ContactDetailPresenter: ContactDetailPresentation {
                     self.viewInterface?.showNoContactError()
             })
             .disposed(by: disposeBag)
+    }
+    
+    func routeToEditScreen() {
+        router.routeToEditScreen(with: contact)
     }
 }

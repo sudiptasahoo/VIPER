@@ -9,27 +9,16 @@
 import UIKit
 import Networking
 
-enum ContactEditMode{
-    case new
-    case update
+// Presenter -> View Interface
+protocol ContactEditViewInterface: class {
+    var presenter: ContactEditPresentation? { get set }
+    func showUpdate(error: Error)
 }
 
 final class ContactEditViewController: UIViewController {
-
-    private(set) var contact: Contact?
-    private(set) var mode: ContactEditMode!
-
+    
+    var presenter: ContactEditPresentation?
     private var tableView: UITableView!
-    
-    init(_ contact: Contact?, mode: ContactEditMode){
-        super.init(nibName: nil, bundle: nil)
-        self.contact = contact
-        self.mode = mode
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +44,7 @@ final class ContactEditViewController: UIViewController {
         
         tableView.register(EditHeaderTableViewCell.self)
         tableView.register(EditMetadataTableViewCell.self)
-
+        
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -79,7 +68,15 @@ final class ContactEditViewController: UIViewController {
     }
     
     @objc private func doneTapped(){
-        self.dismiss(animated: true, completion: nil)
+        
+        guard let presenter = presenter else {fatalError("presenter has not been injected")}
+        do{
+            try presenter.updateContact(contact: presenter.tempContact)
+        } catch let error as FieldValidationError{
+            alert(with: "Error", message: error.localizedDescription, actionButtonTitle: "OK")
+        } catch {
+            alert(with: "Error", message: "Contact could not be saved", actionButtonTitle: "OK")
+        }
     }
     
 }
@@ -87,27 +84,30 @@ final class ContactEditViewController: UIViewController {
 extension ContactEditViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return presenter?.sections ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MetadataType.allCases.count + 1
+        return presenter?.getNoOfRows(for: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.row {
-        case 0:
-            let cell = tableView.dequeueReusableCell(for: indexPath) as EditHeaderTableViewCell
-            cell.configureCell(for: contact)
-            return cell
+        guard let presenter = presenter else {fatalError("presenter has not been injected")}
+        let dType = presenter.getDisplayType(for: indexPath)
+        
+        switch dType {
             
-        default:
-            guard let type = MetadataType(rawValue: indexPath.row - 1) else {
-                fatalError("Wrong values provided in numberOfRowsInSection")
-            }
+        case .profileImage:
+            
+            let cell = tableView.dequeueReusableCell(for: indexPath) as EditHeaderTableViewCell
+            cell.configureCell(for: presenter.contact)
+            return cell
+
+        case .email, .phone, .firstName, .lastName:
+            
             let cell = tableView.dequeueReusableCell(for: indexPath) as EditMetadataTableViewCell
-            cell.configureCell(for: contact, with: type)
+            cell.configureCell(for: presenter.contact, with: dType)
             cell.delegate = self
             return cell
         }
@@ -115,24 +115,34 @@ extension ContactEditViewController: UITableViewDelegate, UITableViewDataSource{
     
 }
 
-extension ContactEditViewController : EditMetadataCellDelegate{
+extension ContactEditViewController : EditMetadataCellDelegate {
     
-    func textChange(_ text: String?, mode: MetadataType) {
+    func textChange(_ text: String?, mode: MetadataDisplayType) {
         
-        guard let text = text else {return}
+        guard let t = text  else {return}
+        let fText = t.trimmingCharacters(in: .whitespacesAndNewlines)
         
         switch mode {
         case .phone:
-            contact?.phoneNumber = text
+            presenter?.tempContact.phoneNumber = fText
             
         case .email:
-            contact?.email = text
+            presenter?.tempContact.email = fText
             
         case .firstName:
-            contact?.firstName = text
+            presenter?.tempContact.firstName = fText
             
         case .lastName:
-            contact?.lastName = text
+            presenter?.tempContact.lastName = fText
+            
+        default: break
         }
+    }
+}
+
+extension ContactEditViewController: ContactEditViewInterface {
+    
+    func showUpdate(error: Error) {
+        alert(with: "Error", message: "Error occured while saving", actionButtonTitle: "OK")
     }
 }

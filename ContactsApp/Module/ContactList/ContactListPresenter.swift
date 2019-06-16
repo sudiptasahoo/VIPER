@@ -33,6 +33,9 @@ protocol ContactListPresentation: class {
     
     ///Returns Contact at indexPath
     func getContact(at indexPath: IndexPath) -> Contact?
+    
+    ///Routes to Edit Screen with editMode = .new
+    func routeToEditScreen()
 }
 
 // MARK:- Presenter -> View Interface
@@ -63,8 +66,13 @@ class ContactListPresenter: ContactListPresentation {
                 return
             }
             
+            
             let sortedContacts = contacts.sorted(by: { (contact1, contact2) -> Bool in
-                return contact1.firstName.lowercased() < contact2.firstName.lowercased()
+                
+                if let fName1 = contact1.firstName, let fName2 = contact2.firstName{
+                    return fName1.lowercased() < fName2.lowercased()
+                }
+                return false
             })
             
             contactsModel = Dictionary(grouping: sortedContacts, by: predicate)
@@ -85,7 +93,7 @@ class ContactListPresenter: ContactListPresentation {
     }
     
     private var predicate: (Contact) -> Character = {
-        guard let c = $0.firstName.uppercased().first else { fatalError() }
+        guard let c = $0.firstName?.uppercased().first else { fatalError() }
         
         let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         let numeric = "0123456789"
@@ -157,4 +165,9 @@ class ContactListPresenter: ContactListPresentation {
         guard let contact = getContact(at: indexPath) else {return}
         router.presentContactDetailView(with: contact)
     }
+    
+    func routeToEditScreen() {
+        router.routeToEditScreen()
+    }
+    
 }

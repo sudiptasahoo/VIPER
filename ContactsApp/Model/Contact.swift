@@ -10,15 +10,26 @@ import Foundation
 
 struct Contact: Codable{
     
-    let id: Int
-    var firstName: String
-    var lastName: String
-    let profilePic: String?
+    var id: Int
+    var firstName: String?
+    var lastName: String?
+    var profilePic: String?
     var favorite: Bool
-    let url: String?
+    var url: String?
     
     var email: String?
     var phoneNumber: String?
+    
+    init() {
+        id = 0
+        firstName = nil
+        lastName = nil
+        profilePic = nil
+        favorite = false
+        url = nil
+        email = nil
+        phoneNumber = nil
+    }
     
     //Will have to write custom decoder
     //let createdAt: Date?

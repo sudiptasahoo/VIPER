@@ -12,7 +12,7 @@ public extension URLRequest {
     
     mutating func encoded(encodable: Encodable, using encoder: JSONEncoder = JSONEncoder()) throws -> URLRequest {
         do {
-            encoder.outputFormatting = .prettyPrinted
+            encoder.keyEncodingStrategy = .convertToSnakeCase
             let anyEncodable = AnyEncodable(encodable: encodable)
             let encodedData = try encoder.encode(anyEncodable)
             httpBody = encodedData

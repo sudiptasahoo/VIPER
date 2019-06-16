@@ -32,7 +32,7 @@ final class ContactListingTableViewCell: UITableViewCell, NibReusable {
 
         guard let contact = contact else {return}
         contactImageView.setImage(contact.profilePic)
-        nameLbl.text = "\(contact.firstName) \(contact.lastName)"
+        nameLbl.text = "\(contact.firstName ?? "") \(contact.lastName ?? "")"
         setFavIcon(contact.favorite)
     }
     

@@ -8,14 +8,6 @@
 
 import UIKit
 
-enum MetadataType: Int, CaseIterable, RawRepresentable{
-    
-    case firstName
-    case lastName
-    case phone
-    case email
-}
-
 final class ContactMetadataTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var titleLbl: UILabel!

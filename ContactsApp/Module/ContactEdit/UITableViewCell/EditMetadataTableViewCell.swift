@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EditMetadataCellDelegate: class{
-    func textChange(_ text: String?, mode: MetadataType)
+    func textChange(_ text: String?, mode: MetadataDisplayType)
 }
 
 class EditMetadataTableViewCell: UITableViewCell, NibReusable {
@@ -17,7 +17,7 @@ class EditMetadataTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var valueTextField: UITextField!
     
-    private var mode: MetadataType!
+    private var mode: MetadataDisplayType!
     weak var delegate: EditMetadataCellDelegate?
     
     override func awakeFromNib() {
@@ -27,7 +27,7 @@ class EditMetadataTableViewCell: UITableViewCell, NibReusable {
         valueTextField.delegate = self
     }
 
-    func configureCell(for contact: Contact?, with metadataType: MetadataType){
+    func configureCell(for contact: Contact?, with metadataType: MetadataDisplayType){
         self.mode = metadataType
         switch metadataType {
         case .phone:
@@ -49,13 +49,11 @@ class EditMetadataTableViewCell: UITableViewCell, NibReusable {
             titleLbl.text = "Last Name"
             valueTextField.text = contact?.lastName
             valueTextField.keyboardType = .default
+            
+        default: fatalError("Invalid Metadata type has been sent to be rendered by EditMetadataTableViewCell")
         }
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        valueTextField.delegate = self
 
-        // Configure the view for the selected state
     }
     
 }
@@ -64,5 +62,16 @@ extension EditMetadataTableViewCell: UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.textChange(textField.text, mode: mode)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.textChange(textField.text, mode: mode)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        delegate?.textChange(textField.text, mode: mode)
+        return true
     }
 }

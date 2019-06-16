@@ -46,7 +46,7 @@ final class ContactHeaderTableViewCell: UITableViewCell, NibReusable {
         selectionStyle = .none
 
         guard let contact = contact else {return}
-        nameLbl.text = "\(contact.firstName) \(contact.lastName)"
+        nameLbl.text = "\(contact.firstName ?? "") \(contact.lastName ?? "")"
         setFavouriteIcon(contact.favorite)
         profileImageView.setImage(contact.profilePic)
     }

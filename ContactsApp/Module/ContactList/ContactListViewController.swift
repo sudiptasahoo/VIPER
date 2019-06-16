@@ -19,7 +19,7 @@ final class ContactListViewController: UIViewController {
     
     private var tableView: UITableView!
     var presenter: ContactListPresentation?
-
+    
     lazy private var refreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
         rc.addTarget(self, action: #selector(handleRefresh(sender:)), for: .valueChanged)
@@ -67,7 +67,7 @@ final class ContactListViewController: UIViewController {
     // MARK:- Acions
     
     @objc private func addTapped(){
-//        AppRouter.shared.routeToEditContactDetails(for: nil, mode: .new)
+        presenter?.routeToEditScreen()
     }
     
     @objc private func handleRefresh(sender: UIRefreshControl) {
@@ -116,16 +116,12 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource{
 extension ContactListViewController : ContactListViewInterface{
     
     func refreshContactList() {
-        DispatchQueue.main.async {
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
-        }
+        self.refreshControl.endRefreshing()
+        self.tableView.reloadData()
     }
     
     func showLoadingError(errorMessage: String) {
-        DispatchQueue.main.async {
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
-        }
+        self.refreshControl.endRefreshing()
+        self.tableView.reloadData()
     }
 }

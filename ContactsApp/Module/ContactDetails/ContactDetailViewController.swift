@@ -59,7 +59,7 @@ final class ContactDetailViewController: UIViewController {
     }
     
     @objc private func editTapped(){
-        //AppRouter.shared.routeToEditContactDetails(for:contact, mode: .update)
+        presenter?.routeToEditScreen()
     }
     
 }
@@ -79,7 +79,7 @@ extension ContactDetailViewController: UITableViewDelegate, UITableViewDataSourc
         guard let presenter = presenter else {fatalError("presenter has not been injected")}
         
         switch presenter.getDisplayType(for: indexPath) {
-        case .header:
+        case .profileImage:
             let cell = tableView.dequeueReusableCell(for: indexPath) as ContactHeaderTableViewCell
             cell.configureCell(for: presenter.contact)
             cell.delegate = self
@@ -95,6 +95,15 @@ extension ContactDetailViewController: UITableViewDelegate, UITableViewDataSourc
             cell.configureCell(for: presenter.contact, with: .email)
             return cell
             
+        case .firstName:
+            let cell = tableView.dequeueReusableCell(for: indexPath) as ContactMetadataTableViewCell
+            cell.configureCell(for: presenter.contact, with: .email)
+            return cell
+            
+        case .lastName:
+            let cell = tableView.dequeueReusableCell(for: indexPath) as ContactMetadataTableViewCell
+            cell.configureCell(for: presenter.contact, with: .email)
+            return cell
         }
     }
     
