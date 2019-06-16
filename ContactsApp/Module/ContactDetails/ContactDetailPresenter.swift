@@ -59,7 +59,7 @@ class ContactDetailPresenter: ContactDetailPresentation {
     
     func prepareToShowContactDetail() {
         
-        interactor.loadContactDetails(endPoint: .getContact(contact.id))
+        interactor.get(for: contact.id)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (contact: Contact) in

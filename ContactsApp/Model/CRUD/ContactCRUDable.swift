@@ -14,9 +14,11 @@ protocol ContactCRUDable{
     var networking: Networking { get }
     func update(_ contact: Contact) -> Observable<Contact>
     func add(_ contact: Contact) -> Observable<Contact>
+    func get(for contactId: Int) -> Observable<Contact>
 }
 
 extension ContactCRUDable{
+    
     
     func update(_ contact: Contact) -> Observable<Contact> {
         
@@ -41,6 +43,28 @@ extension ContactCRUDable{
         
         return Observable.create { [weak networking] (observer) -> Disposable in
             let task = networking?.request(ContactEndPoint.addContact(contact)) { (result: Result<Contact, Error>) in
+                switch result {
+                case .success(let contact):
+                    observer.onNext(contact)
+                    observer.onCompleted()
+                case .failure(let error):
+                    observer.onError(error)
+                }
+            }
+            
+            return Disposables.create {
+                task?.cancel()
+            }
+        }
+    }
+    
+    /// Get contact details from webservice
+    /// On success: refresh contact detail in vc
+    /// On failure: show error view in detail vc
+    func get(for contactId: Int) -> Observable<Contact> {
+        
+        return Observable.create { [weak networking] (observer) -> Disposable in
+            let task = networking?.request(ContactEndPoint.getContact(contactId)) { (result: Result<Contact, Error>) in
                 switch result {
                 case .success(let contact):
                     observer.onNext(contact)
