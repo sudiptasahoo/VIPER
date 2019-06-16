@@ -49,8 +49,8 @@ extension NetworkDispatcher {
         if #available(iOS 11.0, tvOS 11.0, *) {
             configuration.waitsForConnectivity = true
         }
-        configuration.timeoutIntervalForRequest = 300
-        configuration.timeoutIntervalForResource = 300
+        configuration.timeoutIntervalForRequest = 60
+        configuration.timeoutIntervalForResource = 60
         return configuration
     }
     
