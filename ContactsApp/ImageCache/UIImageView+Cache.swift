@@ -11,8 +11,6 @@ import ImageCache
 
 extension UIImageView{
     
-    static let BASE_URL = "https://gojek-contacts-app.herokuapp.com"
-    
     func setImage(_ path: String?, placeHolderImage: UIImage? = nil){
         
         guard let path = path else {
@@ -25,7 +23,7 @@ extension UIImageView{
         if path.hasPrefix("http"){
             url = URL(string: path)
         } else{
-            url = URL(string: "\(UIImageView.BASE_URL)\(path)")
+            url = URL(string: "\(AppConstants.Networking.BASE_URL)\(path)")
         }
         
         self.ss_setImage(url, placeHolderImage)

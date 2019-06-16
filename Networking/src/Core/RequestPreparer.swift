@@ -21,7 +21,7 @@ public struct NetworkRequestPreparer: NetworkRequestPreparable{
             var request = try encodedURLRequest(withURL: url, task: route.task)
             request.httpMethod = route.method.rawValue
             request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
-            request.timeoutInterval = 60.0
+            request.timeoutInterval = 300.0
             request.allHTTPHeaderFields = route.headers
             
             return request

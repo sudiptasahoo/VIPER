@@ -17,7 +17,7 @@ public protocol NetworkService: AnyObject {
 
 public final class Networking: NetworkService{
     
-    private let network = HTTPNetworkOperation([NetworkLogger()], NetworkRequestPreparer(), NetworkDispatcher())
+    private let network = HTTPNetworkOperation([NetworkLogger(), StatusBarLoader()], NetworkRequestPreparer(), NetworkDispatcher())
     
     /// Gives a singleton instance of Networking class
     public static let shared = Networking()

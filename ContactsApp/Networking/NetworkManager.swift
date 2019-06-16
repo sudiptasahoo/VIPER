@@ -12,7 +12,7 @@ import Networking
 extension EndPoint{
     
     var baseURL: URL {
-        guard let url = URL(string: "https://gojek-contacts-app.herokuapp.com") else { fatalError("baseURL could not be configured.")}
+        guard let url = URL(string: AppConstants.Networking.BASE_URL) else { fatalError("baseURL could not be configured.")}
         return url
     }
     

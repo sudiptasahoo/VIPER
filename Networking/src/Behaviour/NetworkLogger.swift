@@ -44,10 +44,10 @@ public struct NetworkLogger: RequestBehaviour {
     public func didReceive(_ result: Result<NetworkOperationResponse, Error>, endPoint: EndPoint) {
         
         print("\n - - - - - - - - INCOMING RESPONSE- - - - - - - - \n")
-        
+        defer { print("\n - - - - - - - - - -  END \(endPoint.baseURL)\(endPoint.path)- - - - - - - - - - \n") }
+
         switch result {
         case .success(let response):
-            defer { print("\n - - - - - - - - - -  END \(response.response?.url?.absoluteString ?? "")- - - - - - - - - - \n") }
             
             if let data = response.data, !data.isEmpty {
                 do {

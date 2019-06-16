@@ -14,7 +14,9 @@ extension UITableView{
     class final func getSignatureTableView(with frame: CGRect) -> UITableView{
         
         let tableView = UITableView(frame: frame)
+        tableView.sectionIndexBackgroundColor = .clear
         tableView.backgroundColor = .pageBackground
+        tableView.backgroundView?.backgroundColor = .pageBackground
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
         

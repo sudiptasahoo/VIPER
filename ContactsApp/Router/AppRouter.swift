@@ -16,18 +16,7 @@ struct AppRouter{
     static let shared = AppRouter()
     
     private init(){
-        navController = UINavigationController(rootViewController: ContactListingViewController())
+        navController = UINavigationController(rootViewController: ContactListModuleBuilder().makeContactListViewController())
         navController.navigationBar.tintColor = .signature
-    }
-    
-    func routeToContactDetails(for contact: Contact){
-        
-        let contactDetailsVc = ContactDetailViewController(contact)
-        navController.pushViewController(contactDetailsVc, animated: true)
-    }
-    
-    func routeToEditContactDetails(for contact: Contact?, mode: ContactEditMode){
-        let contactDetailsVc = ContactEditViewController(contact, mode: mode)
-        navController.present(contactDetailsVc, animated: true, completion: nil)
     }
 }

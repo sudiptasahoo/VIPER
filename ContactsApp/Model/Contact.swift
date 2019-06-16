@@ -11,14 +11,14 @@ import Foundation
 struct Contact: Codable{
     
     let id: Int
-    let firstName: String
-    let lastName: String
+    var firstName: String
+    var lastName: String
     let profilePic: String?
     var favorite: Bool
     let url: String?
     
-    let email: String?
-    let phoneNumber: String?
+    var email: String?
+    var phoneNumber: String?
     
     //Will have to write custom decoder
     //let createdAt: Date?
