@@ -109,6 +109,16 @@ extension ContactDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        guard let presenter = presenter else {fatalError("presenter has not been injected")}
+        
+        switch presenter.getDisplayType(for: indexPath) {
+        case .phone: makePhoneCall()
+        case .email: sendEmail()
+        default: break
+            
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -137,16 +147,28 @@ extension ContactDetailViewController : ContactHeaderDelegate, ContactActions{
     }
     
     func callTapped() {
-        guard let phoneNo = presenter?.contact.phoneNumber else {return}
-        self.phoneCall(to: phoneNo)
+        makePhoneCall()
     }
     
     func emailTapped() {
-        guard let email = presenter?.contact.email else {return}
-        self.draftEmail(to: email)
+        sendEmail()
     }
     
     func favouriteTapped() {
         presenter?.toggleFavorite()
     }
+}
+
+extension ContactDetailViewController {
+    
+    func makePhoneCall(){
+        guard let phoneNo = presenter?.contact.phoneNumber else {return}
+        self.phoneCall(to: phoneNo)
+    }
+    
+    func sendEmail(){
+        guard let email = presenter?.contact.email else {return}
+        self.draftEmail(to: email)
+    }
+    
 }

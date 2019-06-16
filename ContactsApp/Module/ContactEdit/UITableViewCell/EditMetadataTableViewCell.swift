@@ -52,8 +52,6 @@ class EditMetadataTableViewCell: UITableViewCell, NibReusable {
             
         default: fatalError("Invalid Metadata type has been sent to be rendered by EditMetadataTableViewCell")
         }
-        valueTextField.delegate = self
-
     }
     
 }
