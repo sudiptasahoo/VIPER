@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// This is one of the default behaviour provided with the Networking module, this behaviour logs the request and response involved in the Network Operation.
+/// This is one of the default behaviours provided with the Networking module, this behaviour logs the request and response involved in the Network Operation.
 public struct NetworkLogger: RequestBehaviour {
     
     public init() {}

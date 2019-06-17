@@ -9,17 +9,21 @@
 import Foundation
 import UIKit
 import Networking
+import RxSwift
 
-class ContactDetailModuleBuilder {
-    lazy var interactor = ContactDetailInteractor(Networking.shared)
-    lazy var router = ContactDetailRouter()
-    var presenter: ContactDetailPresenter!
+final class ContactDetailModuleBuilder {
     
-    func createModule(for contact: Contact) -> UIViewController {
-        let view = ContactDetailViewController()
-        presenter = ContactDetailPresenter(interactor: interactor, router: router, contact: contact)
-        view.presenter = presenter
-        presenter.viewInterface = view
-        return view
+    class func createModule(for contact: Contact, inheritedTask: PublishSubject<Contact>) -> UIViewController {
+        
+        let interactor = ContactDetailInteractor(Networking.shared)
+        let router = ContactDetailRouter()
+        let presenter = ContactDetailPresenter(interactor: interactor, router: router, contact: contact, inheritedTask: inheritedTask)
+        let vc = ContactDetailViewController()
+        vc.presenter = presenter
+        
+        // Dependency Inversion
+        presenter.viewInterface = vc
+        
+        return vc
     }
 }

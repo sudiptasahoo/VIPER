@@ -9,14 +9,17 @@
 import Foundation
 import Networking
 
-class ContactListModuleBuilder {
-    lazy var interactor = ContactListInteractor(Networking.shared)
-    lazy var router = ContactListRouter()
-    lazy var presenter = ContactListPresenter(interactor: interactor, router: router)
+final class ContactListModuleBuilder {
     
-    func makeContactListViewController() -> ContactListViewController {
+    class func createModule() -> ContactListViewController {
+        
+        let interactor = ContactListInteractor(Networking.shared)
+        let router = ContactListRouter()
+        let presenter = ContactListPresenter(interactor: interactor, router: router)
         let listVc = ContactListViewController()
+        
         listVc.presenter = presenter
+        
         // Dependency Inversion
         presenter.contactListViewInterface = listVc
         

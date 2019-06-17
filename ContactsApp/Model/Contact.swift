@@ -20,6 +20,15 @@ struct Contact: Codable{
     var email: String?
     var phoneNumber: String?
     
+    var fullName: String?{
+        
+        if let fName = firstName, let lName = lastName{
+            return "\(fName) \(lName)"
+        }
+        
+        return firstName ?? lastName
+    }
+    
     init() {
         id = 0
         firstName = nil
@@ -34,5 +43,4 @@ struct Contact: Codable{
     //Will have to write custom decoder
     //let createdAt: Date?
     //let updatedAt: Date?
-    
 }

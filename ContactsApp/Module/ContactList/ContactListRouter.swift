@@ -7,28 +7,18 @@
 //
 
 import Foundation
+import RxSwift
 
-protocol ContactListRouting: class {
-    var detailModule: ContactDetailModuleBuilder { get }
-    var editModule: ContactEditModuleBuilder { get }
-
-    func presentContactDetailView(with contact: Contact)
-    func routeToEditScreen()
-}
-
-class ContactListRouter: ContactListRouting {
+struct ContactListRouter: ContactListRoutable {
     
-    var detailModule = ContactDetailModuleBuilder()
-    var editModule = ContactEditModuleBuilder()
-    
-    func presentContactDetailView(with contact: Contact) {
-        let detailVC = detailModule.createModule(for: contact)
+    func presentContactDetailView(with contact: Contact, inheritedTask: PublishSubject<Contact>) {
+        let detailVC = ContactDetailModuleBuilder.createModule(for: contact, inheritedTask: inheritedTask)
         let navVc = AppRouter.shared.navController
         navVc.pushViewController(detailVC, animated: true)
     }
     
-    func routeToEditScreen() {
-        let editVc = editModule.createModule(for: nil, mode: .new)
+    func routeToEditScreen(inheritedTask: PublishSubject<Contact>) {
+        let editVc = ContactEditModuleBuilder.createModule(for: nil, mode: .new, inheritedTask: inheritedTask)
         let navVc = AppRouter.shared.navController
         navVc.present(editVc, animated: true, completion: nil)
     }

@@ -9,52 +9,25 @@
 import Foundation
 import RxSwift
 
-enum ContactEditMode{
-    case new
-    case update
-}
-
-enum MetadataType: Int, CaseIterable, RawRepresentable{
-    
-    case firstName
-    case lastName
-    case phone
-    case email
-}
-
-// View -> Presenter Interface
-protocol ContactEditPresentation: class {
-    var interactor: ContactEditInteraction { get }
-    var router: ContactEditRouting { get }
-    var sections: Int { get }
-    func getNoOfRows(for section: Int) -> Int
-    func getDisplayType(for indexPath: IndexPath) -> MetadataDisplayType
-    
-    var contact: Contact? { get }
-    
-    ///For temporary storage of Edited Contact info
-    var tempContact: Contact { get set }
-    func updateContact(contact: Contact) throws
-}
-
-class ContactEditPresenter: ContactEditPresentation {
-    
+final class ContactEditPresenter: ContactEditPresentable {
     
     weak var viewInterface: ContactEditViewInterface?
     private let disposeBag = DisposeBag()
     private(set) var contact: Contact?
     var tempContact: Contact
     var mode: ContactEditMode = .new
-    var interactor: ContactEditInteraction
-    var router: ContactEditRouting
-    
-    init(interactor: ContactEditInteraction,
-         router: ContactEditRouting, contact: Contact?, mode: ContactEditMode) {
+    var inheritedTask: PublishSubject<Contact>?
+    let interactor: ContactEditInteractable
+    let router: ContactEditRoutable
+
+    init(interactor: ContactEditInteractable,
+         router: ContactEditRoutable, contact: Contact?, mode: ContactEditMode, inheritedTask: PublishSubject<Contact>) {
         self.interactor = interactor
         self.router = router
         self.contact = contact
         self.tempContact = contact ?? Contact()
         self.mode = mode
+        self.inheritedTask = inheritedTask
     }
     
     // MARK: Logic
@@ -102,6 +75,7 @@ class ContactEditPresenter: ContactEditPresentation {
                     return
                 }
                 self.contact = contact
+                self.inheritedTask?.onNext(contact)
                 self.tempContact = contact
                 self.router.dismiss()
                 

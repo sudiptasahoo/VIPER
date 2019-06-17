@@ -8,8 +8,10 @@
 
 import Foundation
 
+// Contains all constants used across the app
 struct AppConstants{
     
+    ///Default constants of the app
     struct Defaults{
         
         static let TEXT_MESSAGE_BODY = "Sample text message"
@@ -17,7 +19,10 @@ struct AppConstants{
         static let EMAIL_BODY = "\nApp developed by Sudipta(dev@sudiptasahoo.in)"
     }
     
+    ///Networking related constants
     struct Networking {
+        
+        ///The GOJEK Contact Server Base URL
         static let BASE_URL = "https://gojek-contacts-app.herokuapp.com"
     }
 }

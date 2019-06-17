@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension UIView {
+    
     final func addSignatureGradient() {
         let layer : CAGradientLayer = CAGradientLayer()
         layer.frame = self.bounds

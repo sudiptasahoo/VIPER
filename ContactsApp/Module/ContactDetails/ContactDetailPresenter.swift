@@ -9,47 +9,34 @@
 import Foundation
 import RxSwift
 
-enum DetailSection: Int, CaseIterable, RawRepresentable{
-    case header
-    case metadata
-}
-
-enum MetadataDisplayType: Int, CaseIterable, RawRepresentable{
-    case profileImage
-    case firstName
-    case lastName
-    case phone
-    case email
-}
-
-// View -> Presenter Interface
-protocol ContactDetailPresentation: class {
-    var interactor: ContactDetailInteraction { get }
-    var router: ContactDetailRouting { get }
-    var sections: Int { get }
-    func prepareToShowContactDetail()
-    func getNoOfRows(for section: Int) -> Int
-    func getDisplayType(for indexPath: IndexPath) -> MetadataDisplayType
+class ContactDetailPresenter: ContactDetailPresentable {
     
-    func toggleFavorite()
-    
-    var contact: Contact! { get }
-    func routeToEditScreen()
-}
-
-class ContactDetailPresenter: ContactDetailPresentation {
-    
-    var interactor: ContactDetailInteraction
-    var router: ContactDetailRouting
+    var interactor: ContactDetailInteractable
+    var router: ContactDetailRoutable
     weak var viewInterface: ContactDetailViewInterface?
     private let disposeBag = DisposeBag()
     private(set) var contact: Contact!
+    var updateTask = PublishSubject<Contact>()
+    weak var inheritedTask : PublishSubject<Contact>?
     
-    init(interactor: ContactDetailInteraction,
-         router: ContactDetailRouting, contact: Contact) {
+    init(interactor: ContactDetailInteractable,
+         router: ContactDetailRoutable, contact: Contact, inheritedTask: PublishSubject<Contact>) {
         self.interactor = interactor
         self.router = router
         self.contact = contact
+        self.inheritedTask = inheritedTask
+        
+        updateTask
+            .subscribe(onNext: {[weak self] (contact) in
+                self?.prepareToShowContactDetail()
+                inheritedTask.onNext(contact)
+            })
+            .disposed(by: disposeBag)
+        
+    }
+    
+    deinit {
+        print("deinit Detail presenter")
     }
     
     // MARK: Logic
@@ -66,8 +53,18 @@ class ContactDetailPresenter: ContactDetailPresentation {
                 guard let self = self else {
                     return
                 }
+                
+                let oldContact = self.contact ?? Contact()
                 self.contact = contact
-                self.viewInterface?.showContactExtraDetail(contact: contact)
+                
+                if oldContact.favorite == contact.favorite &&
+                    oldContact.firstName == contact.firstName &&
+                    oldContact.lastName == contact.lastName &&
+                    oldContact.profilePic == contact.profilePic{
+                    self.viewInterface?.showContactExtraDetail(contact: contact)
+                } else{
+                    self.viewInterface?.showContactDetail(contact: contact)
+                }
                 
                 }, onError: { [weak self] (error: Error) in
                     guard let self = self else {
@@ -130,6 +127,7 @@ class ContactDetailPresenter: ContactDetailPresentation {
                     return
                 }
                 self.contact = contact
+                self.inheritedTask?.onNext(contact)
                 self.viewInterface?.showContactDetail(contact: contact)
                 
                 }, onError: { [weak self] (error: Error) in
@@ -142,6 +140,6 @@ class ContactDetailPresenter: ContactDetailPresentation {
     }
     
     func routeToEditScreen() {
-        router.routeToEditScreen(with: contact)
+        router.routeToEditScreen(with: contact, inheritedTask: updateTask)
     }
 }

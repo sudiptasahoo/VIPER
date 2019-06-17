@@ -8,12 +8,13 @@
 
 import UIKit
 
-class EditHeaderTableViewCell: UITableViewCell, NibReusable {
+final class EditHeaderTableViewCell: UITableViewCell, CellThemeable, NibReusable {
 
     @IBOutlet weak var profileImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.signatureThemify()
+        
+        signatureThemify()
         themify()
     }
     
@@ -27,12 +28,9 @@ class EditHeaderTableViewCell: UITableViewCell, NibReusable {
         selectionStyle = .none
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
     @IBAction func uploadPhotoTapped(_ sender: Any) {
+        //To be implemented
+        print("To be implemented ...")
     }
 }

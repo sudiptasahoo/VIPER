@@ -17,7 +17,6 @@ protocol ContactHeaderDelegate: class{
 
 final class ContactHeaderTableViewCell: UITableViewCell, NibReusable {
 
-    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var favouriteBtn: UIButton!
     @IBOutlet weak var nameLbl: UILabel!
@@ -26,30 +25,36 @@ final class ContactHeaderTableViewCell: UITableViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.signatureThemify()
+        
         themify()
         setupCell()
     }
     
+    ///It takes Contact object and configures the whole cell. This is the only way to configure the UI of this cell
+    func configureCell(for contact: Contact?){
+        
+        selectionStyle = .none
+        
+        guard let contact = contact else {return}
+        nameLbl.text = contact.fullName
+        setFavouriteIcon(contact.favorite)
+        profileImageView.setImage(contact.profilePic)
+    }
+    
+    // MARK:- Private methods
+    
+    ///Cell and usecase specific themifications are done here
     private func themify(){
         profileImageView.round(with: .white, borderWidth: 4.0)
         contentView.addSignatureGradient()
     }
     
+    ///Configure the cell params
     private func setupCell(){
         favouriteBtn.setImage(UIImage(named: "ic_favourite_selected"), for: .selected)
         favouriteBtn.setImage(UIImage(named: "ic_favourite"), for: .normal)
     }
     
-    func configureCell(for contact: Contact?){
-
-        selectionStyle = .none
-
-        guard let contact = contact else {return}
-        nameLbl.text = "\(contact.firstName ?? "") \(contact.lastName ?? "")"
-        setFavouriteIcon(contact.favorite)
-        profileImageView.setImage(contact.profilePic)
-    }
     
     private func setFavouriteIcon(_ isFavourite: Bool){
         favouriteBtn.isSelected = isFavourite

@@ -10,33 +10,71 @@ import Foundation
 import Networking
 import RxSwift
 
-// MARK:- Interaction Protocol
-protocol ContactListInteraction {
-    func loadContacts(endPoint: ContactEndPoint) -> Observable<[Contact]>
-}
 
 // MARK:- Interactor
-class ContactListInteractor: ContactListInteraction {
+final class ContactListInteractor: ContactListInteractable {
     
     var networking: Networking!
     
-    /// Init
+    // MARK:- Init
     init(_ networking: Networking) {
         self.networking = networking
     }
     
-    /// Get contacts from webservice
-    /// On success: refresh contact list in list view
-    /// On failure: show error view in list view
-    func loadContacts(endPoint: ContactEndPoint) -> Observable<[Contact]> {
-
+    func sortingPredicate(lhs: Character, rhs: Character) -> Bool {
+        
+        if lhs.isLetter && !rhs.isLetter {
+            return true
+        }
+        if !lhs.isLetter && rhs.isLetter {
+            return false
+        }
+        return lhs < rhs
+    }
+    
+    private var predicate: (Contact) -> Character = {
+        guard let c = $0.firstName?.uppercased().first else { fatalError() }
+        
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let numeric = "0123456789"
+        if c.isLetter {
+            return c
+        } else if c.isNumber {
+            return "#" as Character
+        } else {
+            return "?" as Character
+        }
+    }
+    
+    
+    /** Get contacts from webservice using Networking framework
+     On success: refresh contact list in list view
+     On failure: show error view in list view
+     */
+    func loadContacts(from endPoint: ContactEndPoint) -> Observable<Dictionary<Character, [Contact]>> {
+        
         return Observable.create { [weak networking] (observer) -> Disposable in
             
-            let task = networking?.request(endPoint) { (result: Result<[Contact], Error>) in
+            let task = networking?.request(endPoint) {[weak self] (result: Result<[Contact], Error>) in
+                
+                guard let self = self else {return}
+                
                 switch result {
                 case .success(let contacts):
-                    observer.onNext(contacts)
+                    
+                    let sortedContacts = contacts.sorted(by: { (contact1, contact2) -> Bool in
+                        
+                        if let fullName1 = contact1.fullName, let fullName2 = contact2.fullName{
+                            return fullName1.lowercased() < fullName2.lowercased()
+                        }
+                        return false
+                    })
+                    
+                    let groupedContact = Dictionary(grouping: sortedContacts, by: self.predicate)
+                    
+                    observer.onNext(groupedContact)
                     observer.onCompleted()
+                    
                 case .failure(let error):
                     observer.onError(error)
                 }

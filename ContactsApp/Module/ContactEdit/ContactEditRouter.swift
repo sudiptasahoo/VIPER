@@ -8,12 +8,7 @@
 
 import Foundation
 
-protocol ContactEditRouting: class {
-    var view: ContactEditViewController? { get set }
-    func dismiss()
-}
-
-class ContactEditRouter: ContactEditRouting{
+final class ContactEditRouter: ContactEditRoutable{
     
     weak var view: ContactEditViewController?
     

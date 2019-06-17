@@ -12,13 +12,18 @@ import Networking
 
 protocol ContactCRUDable{
     var networking: Networking { get }
+    
+    /// Edit existing contact
     func update(_ contact: Contact) -> Observable<Contact>
+    
+    /// Add a new contact
     func add(_ contact: Contact) -> Observable<Contact>
+    
+    /// Get contact details from webservice
     func get(for contactId: Int) -> Observable<Contact>
 }
 
 extension ContactCRUDable{
-    
     
     func update(_ contact: Contact) -> Observable<Contact> {
         
@@ -58,9 +63,6 @@ extension ContactCRUDable{
         }
     }
     
-    /// Get contact details from webservice
-    /// On success: refresh contact detail in vc
-    /// On failure: show error view in detail vc
     func get(for contactId: Int) -> Observable<Contact> {
         
         return Observable.create { [weak networking] (observer) -> Disposable in

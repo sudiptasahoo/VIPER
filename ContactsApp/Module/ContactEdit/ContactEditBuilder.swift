@@ -9,19 +9,23 @@
 import Foundation
 import UIKit
 import Networking
+import RxSwift
 
-class ContactEditModuleBuilder {
-    lazy var interactor = ContactEditInteractor(Networking.shared)
-    lazy var router = ContactEditRouter()
-    var presenter: ContactEditPresenter!
+final class ContactEditModuleBuilder {
     
-    func createModule(for contact: Contact?, mode: ContactEditMode) -> UIViewController {
+    class func createModule(for contact: Contact?, mode: ContactEditMode, inheritedTask: PublishSubject<Contact>) -> UIViewController {
+        
+        let interactor = ContactEditInteractor(Networking.shared)
+        let router = ContactEditRouter()
+        let presenter = ContactEditPresenter(interactor: interactor, router: router, contact: contact, mode: mode, inheritedTask: inheritedTask)
         let view = ContactEditViewController()
-        presenter = ContactEditPresenter(interactor: interactor, router: router, contact: contact, mode: mode)
+
         view.presenter = presenter
+        
         //dependency inversion
         router.view = view
         presenter.viewInterface = view
+        
         return view
     }
 }

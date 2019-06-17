@@ -12,7 +12,7 @@ protocol EditMetadataCellDelegate: class{
     func textChange(_ text: String?, mode: MetadataDisplayType)
 }
 
-class EditMetadataTableViewCell: UITableViewCell, NibReusable {
+final class EditMetadataTableViewCell: UITableViewCell, CellThemeable, NibReusable {
 
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var valueTextField: UITextField!
@@ -22,7 +22,8 @@ class EditMetadataTableViewCell: UITableViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.signatureThemify()
+
+        signatureThemify()
         selectionStyle = .none
         valueTextField.delegate = self
     }

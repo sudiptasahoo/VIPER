@@ -11,7 +11,6 @@ import UIKit
 import MessageUI
 
 protocol ContactActions: class {
-    
     func phoneCall(to phoneNo: String)
     func textMessage(to phoneno: String, _ message: String)
     func draftEmail(to email: String, subject: String, body: String)

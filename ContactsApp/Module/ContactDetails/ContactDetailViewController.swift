@@ -7,20 +7,11 @@
 //
 
 import UIKit
-import Networking
-
-// Presenter -> View Interface
-protocol ContactDetailViewInterface: class {
-    var presenter: ContactDetailPresentation? { get set }
-    func showNoContactError()
-    func showContactExtraDetail(contact: Contact)
-    func showContactDetail(contact: Contact)
-}
 
 final class ContactDetailViewController: UIViewController {
     
     private var tableView: UITableView!
-    var presenter: ContactDetailPresentation?
+    var presenter: ContactDetailPresentable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +53,9 @@ final class ContactDetailViewController: UIViewController {
         presenter?.routeToEditScreen()
     }
     
+    deinit {
+        print("deinit Details screen")
+    }
 }
 
 extension ContactDetailViewController: UITableViewDelegate, UITableViewDataSource{

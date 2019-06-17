@@ -10,25 +10,7 @@ import Foundation
 import RxSwift
 import Networking
 
-enum FieldValidationError: String, Error, RawRepresentable, LocalizedError{
-    case invalidEmail = "Please enter a valid Email Address"
-    case invalidPhone = "Please enter a valid Phone no"
-    case invalidFirstName = "Please enter a valid Firstname"
-    case invalidLastName = "Please enter a valid Lastname"
-    case emptyEmail = "Please enter your Email Address"
-    case emptyPhone = "Please enter your Phone No"
-    case emptyFirstname = "Please enter your Firstname"
-    case emptyLastName = "Please enter your Lastname"
-    
-    var localizedDescription: String { return NSLocalizedString(self.rawValue, comment: "") }
-}
-
-// MARK:- Interaction Protocol
-protocol ContactEditInteraction: ContactCRUDable {
-    func validateAndUpdate(_ contact: Contact, mode: ContactEditMode) throws -> Observable<Contact>
-}
-
-class ContactEditInteractor: ContactEditInteraction{
+final class ContactEditInteractor: ContactEditInteractable{
     
     var networking: Networking
     private let disposeBag = DisposeBag()

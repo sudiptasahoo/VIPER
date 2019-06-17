@@ -8,19 +8,12 @@
 
 import Foundation
 import Networking
-import RxSwift
 
-
-// MARK:- Interaction Protocol
-protocol ContactDetailInteraction: ContactCRUDable {
-
-}
-
-class ContactDetailInteractor: ContactDetailInteraction {
+final class ContactDetailInteractor: ContactDetailInteractable {
 
     var networking: Networking
     
-    /// Init
+    //MARK:- Init
     init(_ networking: Networking) {
         self.networking = networking
     }

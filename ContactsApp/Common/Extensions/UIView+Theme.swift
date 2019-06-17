@@ -14,5 +14,4 @@ extension UIView{
     final func signatureThemify(){
         backgroundColor = .pageBackground
     }
-    
 }

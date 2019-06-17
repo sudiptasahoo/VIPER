@@ -7,19 +7,13 @@
 //
 
 import UIKit
-import Networking
-
-enum PageState{
-    case loading
-    case error
-    case normal
-}
 
 final class ContactListViewController: UIViewController {
     
+    var presenter: ContactListPresentable?
     private var tableView: UITableView!
-    var presenter: ContactListPresentation?
     
+    ///Customized Refresh Control for this VC
     lazy private var refreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
         rc.addTarget(self, action: #selector(handleRefresh(sender:)), for: .valueChanged)
@@ -27,6 +21,8 @@ final class ContactListViewController: UIViewController {
         return rc
     }()
     
+    //MARK:- Init
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScreen()
@@ -41,32 +37,33 @@ final class ContactListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    private func setupScreen(){
+    //MARK:- Private Methods
+
+    private func setupScreen() {
         
         self.title = "Contact"
         view.signatureThemify()
         setupTableView()
     }
     
-    private func setupTableView(){
+    private func setupTableView() {
         tableView = UITableView.getSignatureTableView(with: view.frame)
         tableView.refreshControl = refreshControl
         view.addSubview(tableView)
         
         tableView.register(ContactListingTableViewCell.self)
-        
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    private func setupNavBar(){
+    private func setupNavBar() {
         let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(ContactListViewController.addTapped))
         navigationItem.rightBarButtonItem = addItem
     }
     
-    // MARK:- Acions
+    //MARK:- Acions
     
-    @objc private func addTapped(){
+    @objc private func addTapped() {
         presenter?.routeToEditScreen()
     }
     
@@ -116,12 +113,12 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource{
 extension ContactListViewController : ContactListViewInterface{
     
     func refreshContactList() {
-        self.refreshControl.endRefreshing()
-        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+        tableView.reloadData()
     }
     
-    func showLoadingError(errorMessage: String) {
-        self.refreshControl.endRefreshing()
-        self.tableView.reloadData()
+    func showLoadingError(with errorMessage: String) {
+        refreshControl.endRefreshing()
+        tableView.reloadData()
     }
 }

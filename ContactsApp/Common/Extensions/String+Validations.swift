@@ -32,14 +32,3 @@ extension String {
         return true
     }
 }
-
-extension Character{
-    
-    func groupCharacter() -> Character{
-        if self.isLetter{
-            return self
-        } else{
-            return "#" as Character
-        }
-    }
-}

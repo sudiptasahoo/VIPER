@@ -7,17 +7,10 @@
 //
 
 import UIKit
-import Networking
-
-// Presenter -> View Interface
-protocol ContactEditViewInterface: class {
-    var presenter: ContactEditPresentation? { get set }
-    func showUpdate(error: Error)
-}
 
 final class ContactEditViewController: UIViewController {
     
-    var presenter: ContactEditPresentation?
+    var presenter: ContactEditPresentable?
     private var tableView: UITableView!
     
     override func viewDidLoad() {

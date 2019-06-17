@@ -8,17 +8,17 @@
 
 import UIKit
 
-final class ContactMetadataTableViewCell: UITableViewCell, NibReusable {
+final class ContactMetadataTableViewCell: UITableViewCell, CellThemeable, NibReusable {
 
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var valueLbl: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.signatureThemify()
+        signatureThemify()
     }
 
+    ///Configures the cell UI with Contact and MetadataType
     func configureCell(for contact: Contact?, with metadataType: MetadataType){
         
         guard let contact = contact else {return}
@@ -37,11 +37,4 @@ final class ContactMetadataTableViewCell: UITableViewCell, NibReusable {
         }
         
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }
