@@ -48,7 +48,9 @@ final class ContactEditViewController: UIViewController {
         navBar.tintColor = .signature
         let navItem = UINavigationItem(title: "")
         let cancelItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.done, target: self, action: #selector(ContactEditViewController.cancelTapped))
+        cancelItem.accessibilityIdentifier = "cancel"
         let doneItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(ContactEditViewController.doneTapped))
+        doneItem.accessibilityIdentifier = "done"
         navItem.leftBarButtonItem = cancelItem
         navItem.rightBarButtonItem = doneItem
         navBar.setItems([navItem], animated: false)
@@ -66,9 +68,9 @@ final class ContactEditViewController: UIViewController {
         do{
             try presenter.updateContact(contact: presenter.tempContact)
         } catch let error as FieldValidationError{
-            alert(with: "Error", message: error.localizedDescription, actionButtonTitle: "OK")
+            alert(with: error.localizedDescription)
         } catch {
-            alert(with: "Error", message: "Contact could not be saved", actionButtonTitle: "OK")
+            alert(with: "Contact could not be saved")
         }
     }
     
@@ -106,6 +108,10 @@ extension ContactEditViewController: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
 }
 
 extension ContactEditViewController : EditMetadataCellDelegate {
@@ -136,6 +142,6 @@ extension ContactEditViewController : EditMetadataCellDelegate {
 extension ContactEditViewController: ContactEditViewInterface {
     
     func showUpdate(error: Error) {
-        alert(with: "Error", message: "Error occured while saving", actionButtonTitle: "OK")
+        alert(with: "Error occured while saving")
     }
 }

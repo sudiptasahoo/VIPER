@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-struct ContactListRouter: ContactListRoutable {
+final class ContactListRouter: ContactListRoutable {
     
     func presentContactDetailView(with contact: Contact, inheritedTask: PublishSubject<Contact>) {
         let detailVC = ContactDetailModuleBuilder.createModule(for: contact, inheritedTask: inheritedTask)

@@ -8,14 +8,13 @@
 
 import Foundation
 import UIKit
-import Networking
 import RxSwift
 
 final class ContactDetailModuleBuilder {
     
     class func createModule(for contact: Contact, inheritedTask: PublishSubject<Contact>) -> UIViewController {
         
-        let interactor = ContactDetailInteractor(Networking.shared)
+        let interactor = ContactDetailInteractor(NetworkManager.shared)
         let router = ContactDetailRouter()
         let presenter = ContactDetailPresenter(interactor: interactor, router: router, contact: contact, inheritedTask: inheritedTask)
         let vc = ContactDetailViewController()

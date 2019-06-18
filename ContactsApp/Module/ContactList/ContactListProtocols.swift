@@ -8,9 +8,16 @@
 
 import Foundation
 import RxSwift
+import Networking
 
 // MARK:- View -> Presenter Interface
 protocol ContactListPresentable: class {
+    
+    ///The view of VIPER
+    var contactListViewInterface: ContactListViewInterface? { get set }
+    
+    ///The interactor of VIPER
+    var interactor: ContactListInteractable { get set }
     
     ///Gives no of sections for UITableView datasource
     var sections: Int { get }
@@ -51,14 +58,14 @@ protocol ContactListViewInterface: class {
 }
 
 // MARK:- Presenter -> Interactor
-protocol ContactListInteractable {
+protocol ContactListInteractable : class{
     
     /**
       Fetches the contacts from the API using the EndPoint provided
         - param: ContactEndPoint which can be understood by the networking layer
         - Returns: RxSwift Observable Array of Contact
      */
-    func loadContacts(from endPoint: ContactEndPoint) -> Observable<Dictionary<Character, [Contact]>>
+    func loadContacts(from endPoint: EndPoint) -> Observable<Dictionary<Character, [Contact]>>
     
     ///Predicate for Sorting logic
     func sortingPredicate(lhs: Character, rhs: Character) -> Bool
@@ -66,7 +73,7 @@ protocol ContactListInteractable {
 }
 
 // MARK:- Presenter -> Router
-protocol ContactListRoutable {
+protocol ContactListRoutable: class {
     
     /**Routes to Contact Details screen
      Initializes the Details screen module with all dependencies and navigates to the same

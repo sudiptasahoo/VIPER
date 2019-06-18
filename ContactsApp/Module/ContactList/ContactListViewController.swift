@@ -28,6 +28,7 @@ final class ContactListViewController: UIViewController {
         setupScreen()
         setupNavBar()
         
+        self.startLoader()
         presenter?.loadContacts()
     }
     
@@ -54,10 +55,12 @@ final class ContactListViewController: UIViewController {
         tableView.register(ContactListingTableViewCell.self)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isHidden = true
     }
     
     private func setupNavBar() {
         let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(ContactListViewController.addTapped))
+        addItem.accessibilityIdentifier = "add_bar_button"
         navigationItem.rightBarButtonItem = addItem
     }
     
@@ -86,12 +89,12 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource{
         
         let contact = presenter?.getContact(at: indexPath)
         let cell = tableView.dequeueReusableCell(for: indexPath) as ContactListingTableViewCell
-        cell.configure(with: contact)
+        cell.configure(with: contact, at: indexPath)
         return cell
         
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
@@ -113,11 +116,14 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource{
 extension ContactListViewController : ContactListViewInterface{
     
     func refreshContactList() {
+        stopLoader()
+        tableView.isHidden = false
         refreshControl.endRefreshing()
         tableView.reloadData()
     }
     
     func showLoadingError(with errorMessage: String) {
+        alert(with: errorMessage)
         refreshControl.endRefreshing()
         tableView.reloadData()
     }

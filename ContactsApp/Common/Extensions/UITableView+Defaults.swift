@@ -19,6 +19,7 @@ extension UITableView{
         tableView.backgroundView?.backgroundColor = .pageBackground
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.accessibilityIdentifier = "contact_table"
         
         return tableView
     }

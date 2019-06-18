@@ -7,17 +7,16 @@
 //
 
 import Foundation
-import Networking
 import RxSwift
-
+import Networking
 
 // MARK:- Interactor
 final class ContactListInteractor: ContactListInteractable {
     
-    var networking: Networking!
+    var networking: NetworkManageable!
     
     // MARK:- Init
-    init(_ networking: Networking) {
+    init(_ networking: NetworkManageable) {
         self.networking = networking
     }
     
@@ -51,7 +50,7 @@ final class ContactListInteractor: ContactListInteractable {
      On success: refresh contact list in list view
      On failure: show error view in list view
      */
-    func loadContacts(from endPoint: ContactEndPoint) -> Observable<Dictionary<Character, [Contact]>> {
+    func loadContacts(from endPoint: EndPoint) -> Observable<Dictionary<Character, [Contact]>> {
         
         return Observable.create { [weak networking] (observer) -> Disposable in
             

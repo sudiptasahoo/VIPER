@@ -13,7 +13,7 @@ final class ContactListPresenter: ContactListPresentable {
     
     // MARK: Init
     private(set) var groupedContact : Dictionary<Character, [Contact]>?
-    private let interactor: ContactListInteractable
+    internal var interactor: ContactListInteractable
     private let router: ContactListRoutable
     weak var contactListViewInterface: ContactListViewInterface?
     let updateTask = PublishSubject<Contact>()
@@ -65,7 +65,7 @@ final class ContactListPresenter: ContactListPresentable {
     }
     
     func loadContacts() {
-        interactor.loadContacts(from: .getContacts)
+        interactor.loadContacts(from: ContactEndPoint.getContacts)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (groupedContact: Dictionary<Character, [Contact]>) in
@@ -79,7 +79,9 @@ final class ContactListPresenter: ContactListPresentable {
                     guard let self = self else {
                         return
                     }
-                    self.contactListViewInterface?.showLoadingError(with: "Some Error occured")
+                    
+                    self.contactListViewInterface?.showLoadingError(with: error.localizedDescription)
+                    
             })
             .disposed(by: disposeBag)
     }

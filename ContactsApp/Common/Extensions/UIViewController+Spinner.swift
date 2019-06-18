@@ -9,33 +9,50 @@
 import Foundation
 import UIKit
 
-extension UIViewController {
+extension UIViewController{
     
-//    var vSpinner: UIView?
-//    
-//    func showSpinner(onView : UIView) {
-//        let spinnerView = UIView.init(frame: onView.bounds)
-//        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-//        let ai = UIActivityIndicatorView.init(style: .whiteLarge)
-//        ai.startAnimating()
-//        ai.center = spinnerView.center
-//        
-//        DispatchQueue.main.async {
-//            spinnerView.addSubview(ai)
-//            onView.addSubview(spinnerView)
-//        }
-//        
-//        vSpinner = spinnerView
-//    }
-//    
-//    func removeSpinner() {
-//        DispatchQueue.main.async {
-//            vSpinner?.removeFromSuperview()
-//            vSpinner = nil
-//        }
-//    }
+    var loaderTag: Int { return 783648 }
     
-    func alert(with title: String?, message: String?, actionButtonTitle: String?){
+    @discardableResult
+    func loadFromNib<T: UIViewController>() -> T {
+        return T(nibName: String(describing: self), bundle: nil)
+    }
+    
+    func addFullScreenBlurView(){
+        DispatchQueue.main.async {
+            let blurEffect = UIBlurEffect(style: .dark)
+            let blurView = UIVisualEffectView(frame: self.view.frame)
+            blurView.effect = blurEffect
+            self.view.addSubview(blurView)
+        }
+    }
+    
+    func startLoader(loadingText: String? = nil) {
+        
+        DispatchQueue.main.async {
+            let blurEffect = UIBlurEffect(style: .extraLight)
+            let activityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+            activityIndicatorView.center = self.view.center
+            let loaderView = UIVisualEffectView(frame: self.view.frame)
+            loaderView.tag = self.loaderTag
+            loaderView.effect = blurEffect
+            activityIndicatorView.startAnimating()
+            loaderView.contentView.addSubview(activityIndicatorView)
+            self.view.addSubview(loaderView)
+        }
+    }
+    
+    
+    func stopLoader(){
+        DispatchQueue.main.async {
+            if let loaderView = self.view.subviews.filter(
+                { $0.tag == self.loaderTag}).first as? UIVisualEffectView {
+                loaderView.removeFromSuperview()
+            }
+        }
+    }
+    
+    func alert(with message: String? = AppConstants.Defaults.ERROR_MESSAGE, title: String? = AppConstants.Defaults.ERROR_TITLE, actionButtonTitle: String? = AppConstants.Defaults.ERROR_OK_BUTTON_TEXT){
         
         let alertController = UIAlertController(title: title ?? "", message: message ?? "", preferredStyle: .alert)
         

@@ -59,3 +59,19 @@ enum FieldValidationError: String, Error, RawRepresentable, LocalizedError{
     
     var localizedDescription: String { return NSLocalizedString(self.rawValue, comment: "") }
 }
+
+
+enum AppError: Error {
+    
+    ///Converts any error like NetworkError, etc into App Error
+    case error(String)
+}
+
+extension AppError: LocalizedError {
+    var localizedDescription: String {
+        switch self {
+        case .error(let errorMsg):
+            return errorMsg
+        }
+    }
+}

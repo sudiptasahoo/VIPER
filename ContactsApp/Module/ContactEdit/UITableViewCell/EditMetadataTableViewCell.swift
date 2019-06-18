@@ -25,7 +25,6 @@ final class EditMetadataTableViewCell: UITableViewCell, CellThemeable, NibReusab
 
         signatureThemify()
         selectionStyle = .none
-        valueTextField.delegate = self
     }
 
     func configureCell(for contact: Contact?, with metadataType: MetadataDisplayType){
@@ -35,42 +34,37 @@ final class EditMetadataTableViewCell: UITableViewCell, CellThemeable, NibReusab
             titleLbl.text = "mobile"
             valueTextField.text = contact?.phoneNumber
             valueTextField.keyboardType = .phonePad
+            valueTextField.placeholder = "Enter 10 digit Phone no"
+            valueTextField.accessibilityIdentifier = "mobile"
             
         case .email:
             titleLbl.text = "email"
             valueTextField.text = contact?.email
             valueTextField.keyboardType = .emailAddress
+            valueTextField.placeholder = "Enter Email"
+            valueTextField.accessibilityIdentifier = "email"
 
         case .firstName:
             titleLbl.text = "First Name"
             valueTextField.text = contact?.firstName
             valueTextField.keyboardType = .default
+            valueTextField.placeholder = "Enter First Name (min 2 characters)"
+            valueTextField.accessibilityIdentifier = "first_name"
 
         case .lastName:
             titleLbl.text = "Last Name"
             valueTextField.text = contact?.lastName
             valueTextField.keyboardType = .default
+            valueTextField.placeholder = "Enter Last Name (min 2 characters)"
+            valueTextField.accessibilityIdentifier = "last_name"
             
         default: fatalError("Invalid Metadata type has been sent to be rendered by EditMetadataTableViewCell")
         }
-    }
-    
-}
-
-extension EditMetadataTableViewCell: UITextFieldDelegate{
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        delegate?.textChange(textField.text, mode: mode)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        delegate?.textChange(textField.text, mode: mode)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        textField.resignFirstResponder()
+        valueTextField.addTarget(self, action: #selector(typingText), for: .editingChanged)
+    }
+    
+    @objc func typingText(textField: UITextField) {
         delegate?.textChange(textField.text, mode: mode)
-        return true
     }
 }

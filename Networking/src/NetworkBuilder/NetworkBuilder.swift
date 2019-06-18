@@ -9,7 +9,7 @@
 import Foundation
 
 //MARK: NetworkService
-public protocol NetworkService: AnyObject {
+public protocol NetworkService: class {
     
     @discardableResult
     func request<T: Decodable>(_ endPoint: EndPoint, completion: @escaping (Result<T, Error>) -> Void) -> URLSessionDataTask?

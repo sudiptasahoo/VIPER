@@ -30,7 +30,7 @@ struct Contact: Codable{
     }
     
     init() {
-        id = 0
+        id = -1
         firstName = nil
         lastName = nil
         profilePic = nil
@@ -43,4 +43,18 @@ struct Contact: Codable{
     //Will have to write custom decoder
     //let createdAt: Date?
     //let updatedAt: Date?
+}
+
+extension Contact : Equatable{
+    
+    static func ==(lhs: Contact, rhs: Contact) -> Bool {
+        return lhs.firstName == rhs.firstName &&
+            lhs.lastName == rhs.lastName &&
+            lhs.profilePic == rhs.profilePic &&
+            lhs.favorite == rhs.favorite &&
+            lhs.url == rhs.url &&
+            lhs.email == rhs.email &&
+            lhs.phoneNumber == rhs.phoneNumber &&
+            lhs.id == rhs.id
+    }
 }

@@ -70,7 +70,7 @@ class ContactDetailPresenter: ContactDetailPresentable {
                     guard let self = self else {
                         return
                     }
-                    self.viewInterface?.showNoContactError()
+                    self.viewInterface?.showContactFetchError()
             })
             .disposed(by: disposeBag)
     }
@@ -134,7 +134,7 @@ class ContactDetailPresenter: ContactDetailPresentable {
                     guard let self = self else {
                         return
                     }
-                    self.viewInterface?.showNoContactError()
+                    self.viewInterface?.showContactFetchError()
             })
             .disposed(by: disposeBag)
     }

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Networking
+@testable import Networking
 
 enum TestEndPoint{
     
@@ -16,6 +16,15 @@ enum TestEndPoint{
 }
 
 extension TestEndPoint: EndPoint{
+    
+    var baseURL: URL {
+        return URL(string: "")!
+    }
+    
+    var headers: HTTPHeaders? {
+        return [:]
+    }
+    
    
     var path: String {
         switch self{

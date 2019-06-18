@@ -21,6 +21,7 @@ final class EditHeaderTableViewCell: UITableViewCell, CellThemeable, NibReusable
     private func themify(){
         profileImageView.round(with: .white, borderWidth: 4.0)
         contentView.addSignatureGradient()
+        separatorInset.right = .greatestFiniteMagnitude
     }
     
     func configureCell(for contact: Contact?){

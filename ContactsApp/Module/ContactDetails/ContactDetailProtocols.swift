@@ -12,7 +12,7 @@ import RxSwift
 // Presenter -> View Interface
 protocol ContactDetailViewInterface: class {
     var presenter: ContactDetailPresentable? { get set }
-    func showNoContactError()
+    func showContactFetchError()
     func showContactExtraDetail(contact: Contact)
     func showContactDetail(contact: Contact)
 }

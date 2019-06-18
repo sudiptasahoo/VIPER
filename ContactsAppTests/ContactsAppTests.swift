@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import ContactsApp
+import RxSwift
 
 class ContactsAppTests: XCTestCase {
 

@@ -89,11 +89,18 @@ struct HTTPNetworkOperation: NetworkOperation{
             return .success(NetworkOperationResponse(statusCode: response.statusCode, data: data, response: response, request: request))
             
         case 401: return .failure(NetworkError.authenticationError)
-        case 402..<500: return .failure(NetworkError.serverError)
-        case 500..<600: return .failure(NetworkError.badRequest)
+        case 402..<500: return .failure(NetworkError.serverError(data?.toJson))
+        case 500..<600: return .failure(NetworkError.badRequest(data?.toJson))
         case 600: return .failure(NetworkError.outdated)
         default: return .failure(NetworkError.failed(error))
             
         }
+    }
+}
+
+internal extension Data{
+    
+    var toJson: Dictionary<String, AnyObject>?{
+        return try? JSONSerialization.jsonObject(with: self, options: []) as? Dictionary<String, AnyObject>
     }
 }

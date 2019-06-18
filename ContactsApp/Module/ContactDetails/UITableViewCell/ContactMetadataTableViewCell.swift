@@ -15,7 +15,7 @@ final class ContactMetadataTableViewCell: UITableViewCell, CellThemeable, NibReu
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        signatureThemify()
+        applySignatureTheme()
     }
 
     ///Configures the cell UI with Contact and MetadataType
@@ -27,10 +27,12 @@ final class ContactMetadataTableViewCell: UITableViewCell, CellThemeable, NibReu
         case .phone:
             titleLbl.text = "mobile"
             valueLbl.text = contact.phoneNumber
+            valueLbl.accessibilityIdentifier = "mobile"
 
         case .email:
             titleLbl.text = "email"
             valueLbl.text = contact.email
+            valueLbl.accessibilityIdentifier = "email"
             
         default:
             fatalError("Only email and mobile is allowed on Details screen")

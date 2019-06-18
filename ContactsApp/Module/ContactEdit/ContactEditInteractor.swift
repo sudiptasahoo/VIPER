@@ -8,21 +8,20 @@
 
 import Foundation
 import RxSwift
-import Networking
 
 final class ContactEditInteractor: ContactEditInteractable{
     
-    var networking: Networking
+    var networking: NetworkManageable
     private let disposeBag = DisposeBag()
     
     /// Init
-    init(_ networking: Networking) {
+    init(_ networking: NetworkManageable) {
         self.networking = networking
     }
     
     func validateAndUpdate(_ contact: Contact, mode: ContactEditMode) throws -> Observable<Contact> {
         
-        guard let firstName = contact.firstName, !firstName.isEmpty else {throw FieldValidationError.emptyLastName}
+        guard let firstName = contact.firstName, !firstName.isEmpty else {throw FieldValidationError.emptyFirstname}
         guard let lastName = contact.lastName, !lastName.isEmpty else {throw FieldValidationError.emptyLastName}
         guard let phoneNo = contact.phoneNumber, !phoneNo.isEmpty else {throw FieldValidationError.emptyPhone}
         guard let email = contact.email, !email.isEmpty else {throw FieldValidationError.emptyEmail}

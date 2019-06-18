@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import Networking
 
 final class ContactDetailInteractor: ContactDetailInteractable {
 
-    var networking: Networking
+    var networking: NetworkManageable
     
     //MARK:- Init
-    init(_ networking: Networking) {
+    init(_ networking: NetworkManageable) {
         self.networking = networking
     }
 }

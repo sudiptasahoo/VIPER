@@ -8,14 +8,13 @@
 
 import Foundation
 import UIKit
-import Networking
 import RxSwift
 
 final class ContactEditModuleBuilder {
     
     class func createModule(for contact: Contact?, mode: ContactEditMode, inheritedTask: PublishSubject<Contact>) -> UIViewController {
         
-        let interactor = ContactEditInteractor(Networking.shared)
+        let interactor = ContactEditInteractor(NetworkManager.shared)
         let router = ContactEditRouter()
         let presenter = ContactEditPresenter(interactor: interactor, router: router, contact: contact, mode: mode, inheritedTask: inheritedTask)
         let view = ContactEditViewController()

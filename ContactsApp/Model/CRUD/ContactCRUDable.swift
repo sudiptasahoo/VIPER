@@ -8,10 +8,9 @@
 
 import Foundation
 import RxSwift
-import Networking
 
 protocol ContactCRUDable{
-    var networking: Networking { get }
+    var networking: NetworkManageable { get }
     
     /// Edit existing contact
     func update(_ contact: Contact) -> Observable<Contact>

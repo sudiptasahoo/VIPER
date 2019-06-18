@@ -9,12 +9,12 @@
 import UIKit
 
 protocol CellThemeable{
-    func signatureThemify()
+    func applySignatureTheme()
 }
 
 extension CellThemeable where Self: UITableViewCell{
     
-    func signatureThemify(){
+    func applySignatureTheme(){
         contentView.signatureThemify()
         signatureThemify()
     }

@@ -15,7 +15,7 @@ protocol ContactHeaderDelegate: class{
     func favouriteTapped()
 }
 
-final class ContactHeaderTableViewCell: UITableViewCell, NibReusable {
+final class ContactHeaderTableViewCell: UITableViewCell, NibReusable, CellThemeable {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var favouriteBtn: UIButton!
@@ -26,6 +26,7 @@ final class ContactHeaderTableViewCell: UITableViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        applySignatureTheme()
         themify()
         setupCell()
     }
@@ -39,6 +40,7 @@ final class ContactHeaderTableViewCell: UITableViewCell, NibReusable {
         nameLbl.text = contact.fullName
         setFavouriteIcon(contact.favorite)
         profileImageView.setImage(contact.profilePic)
+        accessibilityLabel = contact.fullName
     }
     
     // MARK:- Private methods
@@ -53,6 +55,7 @@ final class ContactHeaderTableViewCell: UITableViewCell, NibReusable {
     private func setupCell(){
         favouriteBtn.setImage(UIImage(named: "ic_favourite_selected"), for: .selected)
         favouriteBtn.setImage(UIImage(named: "ic_favourite"), for: .normal)
+        separatorInset.right = .greatestFiniteMagnitude
     }
     
     

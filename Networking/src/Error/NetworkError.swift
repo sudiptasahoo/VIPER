@@ -8,12 +8,14 @@
 
 import Foundation
 
-public enum NetworkError: Error, LocalizedError {
+internal let DEFAULT_ERROR_MESSAGE = "Something went wrong"
+
+public enum NetworkError: Error {
     
     case failed(Error?)
     case outdated
-    case badRequest
-    case serverError
+    case badRequest(Dictionary<String, AnyObject>?)
+    case serverError(Dictionary<String, AnyObject>?)
     case authenticationError
 }
 

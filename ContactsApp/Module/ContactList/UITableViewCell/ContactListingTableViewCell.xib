@@ -52,6 +52,10 @@
                     <constraint firstItem="ERa-52-iCo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xT9-FT-mSc"/>
                 </constraints>
             </tableViewCellContentView>
+            <accessibility key="accessibilityConfiguration">
+                <accessibilityTraits key="traits" staticText="YES"/>
+                <bool key="isElement" value="YES"/>
+            </accessibility>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="contactImageView" destination="ERa-52-iCo" id="gZB-z6-2vi"/>

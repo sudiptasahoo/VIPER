@@ -8,12 +8,12 @@ target 'ContactsApp' do
   pod "RxSwift"
 
   target 'ContactsAppTests' do
-    inherit! :search_paths
+    # inherit! :search_paths
     # Pods for testing
   end
 
   target 'ContactsAppUITests' do
-    inherit! :search_paths
+    # inherit! :search_paths
     # Pods for testing
   end
 

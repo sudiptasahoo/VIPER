@@ -26,13 +26,17 @@ final class ContactListingTableViewCell: UITableViewCell, CellThemeable, NibReus
     //MARK:- Public methods
 
     ///It takes Contact object and configures the whole cell. This is the only way to configure the UI of this cell
-    func configure(with contact: Contact?) {
+    func configure(with contact: Contact?, at indexPath: IndexPath) {
         
         self.selectionStyle = .none
         guard let contact = contact else {return}
         contactImageView.setImage(contact.profilePic)
         nameLbl.text = contact.fullName
         setFavIcon(contact.favorite)
+        
+        //Useful for UI Testing
+        accessibilityIdentifier = "List Row\(indexPath.row)\(indexPath.section)"
+        //accessibilityLabel = "List Row\(indexPath.row)\(indexPath.section)"
     }
     
     //MARK:- Private methods

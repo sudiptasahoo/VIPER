@@ -7,13 +7,12 @@
 //
 
 import Foundation
-import Networking
 
 final class ContactListModuleBuilder {
     
     class func createModule() -> ContactListViewController {
         
-        let interactor = ContactListInteractor(Networking.shared)
+        let interactor = ContactListInteractor(NetworkManager.shared)
         let router = ContactListRouter()
         let presenter = ContactListPresenter(interactor: interactor, router: router)
         let listVc = ContactListViewController()

@@ -12,6 +12,7 @@ final class ContactDetailViewController: UIViewController {
     
     private var tableView: UITableView!
     var presenter: ContactDetailPresentable?
+    var editBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +46,10 @@ final class ContactDetailViewController: UIViewController {
     }
     
     private func setupNavBar(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.done, target: self, action: #selector(ContactDetailViewController.editTapped))
-        
+        editBtn = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.done, target: self, action: #selector(ContactDetailViewController.editTapped))
+        editBtn.accessibilityIdentifier = "edit"
+        editBtn.isEnabled = false
+        navigationItem.rightBarButtonItem = editBtn
     }
     
     @objc private func editTapped(){
@@ -114,21 +117,25 @@ extension ContactDetailViewController: UITableViewDelegate, UITableViewDataSourc
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }
 
 extension ContactDetailViewController : ContactDetailViewInterface{
     
     func showContactExtraDetail(contact: Contact) {
-        self.tableView.reloadSections([1], with: .automatic)
+        editBtn.isEnabled = true
+        tableView.reloadSections([1], with: .automatic)
     }
     
-    
-    func showNoContactError() {
-        
+    func showContactFetchError() {
+        alert()
     }
     
     func showContactDetail(contact: Contact) {
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
     
 }
