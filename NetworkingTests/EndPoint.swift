@@ -18,7 +18,7 @@ enum TestEndPoint{
 extension TestEndPoint: EndPoint{
     
     var baseURL: URL {
-        return URL(string: "")!
+        return URL(string: "https://www.example.com/api/v2")!
     }
     
     var headers: HTTPHeaders? {

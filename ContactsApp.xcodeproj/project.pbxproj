@@ -70,8 +70,8 @@
 		016F95E322B8CFA30065A575 /* EndPointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016F95E222B8CFA30065A575 /* EndPointMock.swift */; };
 		016F95E522B8E2C40065A575 /* ContactListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016F95E422B8E2C40065A575 /* ContactListInteractorTests.swift */; };
 		016F95E722B8EEA70065A575 /* ListMockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016F95E622B8EEA70065A575 /* ListMockView.swift */; };
-		016F95EB22B8F7A50065A575 /* ContactDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016F95EA22B8F7A50065A575 /* ContactDetailPresenterTest.swift */; };
 		016F95EF22B9194B0065A575 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016F95EE22B9194B0065A575 /* Extensions.swift */; };
+		016F95F122B975A00065A575 /* MockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016F95F022B975A00065A575 /* MockModel.swift */; };
 		017DBAF422B69C8D00A63171 /* ContactModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017DBAF322B69C8D00A63171 /* ContactModelTests.swift */; };
 		017DBAF522B69DBC00A63171 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155752D22B6369600A26DAD /* AppConstants.swift */; };
 		017DBAF622B69DBD00A63171 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155752D22B6369600A26DAD /* AppConstants.swift */; };
@@ -84,7 +84,6 @@
 		017DBB0722B7C38800A63171 /* ContactListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017DBB0622B7C38800A63171 /* ContactListProtocols.swift */; };
 		017DBB0922B7D85D00A63171 /* ContactDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017DBB0822B7D85D00A63171 /* ContactDetailProtocols.swift */; };
 		017DBB0B22B7DB3100A63171 /* ContactEditProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017DBB0A22B7DB3100A63171 /* ContactEditProtocols.swift */; };
-		017DBB1622B808A700A63171 /* ContactListPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017DBB1522B808A700A63171 /* ContactListPresenterTest.swift */; };
 		0190FE2122AEC054002A302E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0190FE2022AEC054002A302E /* AppDelegate.swift */; };
 		0190FE2822AEC055002A302E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0190FE2722AEC055002A302E /* Assets.xcassets */; };
 		0190FE2B22AEC055002A302E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0190FE2922AEC055002A302E /* LaunchScreen.storyboard */; };
@@ -248,8 +247,8 @@
 		016F95E222B8CFA30065A575 /* EndPointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointMock.swift; sourceTree = "<group>"; };
 		016F95E422B8E2C40065A575 /* ContactListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListInteractorTests.swift; sourceTree = "<group>"; };
 		016F95E622B8EEA70065A575 /* ListMockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMockView.swift; sourceTree = "<group>"; };
-		016F95EA22B8F7A50065A575 /* ContactDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailPresenterTest.swift; sourceTree = "<group>"; };
 		016F95EE22B9194B0065A575 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		016F95F022B975A00065A575 /* MockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModel.swift; sourceTree = "<group>"; };
 		017DBAF322B69C8D00A63171 /* ContactModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModelTests.swift; sourceTree = "<group>"; };
 		017DBAF922B6A96200A63171 /* ContactCRUDable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCRUDable.swift; sourceTree = "<group>"; };
 		017DBAFB22B6B69A00A63171 /* ContactEditPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEditPresenter.swift; sourceTree = "<group>"; };
@@ -260,7 +259,6 @@
 		017DBB0622B7C38800A63171 /* ContactListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListProtocols.swift; sourceTree = "<group>"; };
 		017DBB0822B7D85D00A63171 /* ContactDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailProtocols.swift; sourceTree = "<group>"; };
 		017DBB0A22B7DB3100A63171 /* ContactEditProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEditProtocols.swift; sourceTree = "<group>"; };
-		017DBB1522B808A700A63171 /* ContactListPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListPresenterTest.swift; sourceTree = "<group>"; };
 		0190FE1D22AEC054002A302E /* ContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0190FE2022AEC054002A302E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0190FE2722AEC055002A302E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -415,17 +413,11 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		015574A822B4F63600A26DAD /* NetworkingTestSuite */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NetworkingTestSuite;
-			sourceTree = "<group>";
-		};
 		015574A922B4F63F00A26DAD /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				0190FE6222AEC5B4002A302E /* NetworkingTests.swift */,
+				016F95F022B975A00065A575 /* MockModel.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -689,21 +681,6 @@
 			path = ContactList;
 			sourceTree = "<group>";
 		};
-		016F95DB22B8C2520065A575 /* ContactDetail */ = {
-			isa = PBXGroup;
-			children = (
-				016F95EA22B8F7A50065A575 /* ContactDetailPresenterTest.swift */,
-			);
-			path = ContactDetail;
-			sourceTree = "<group>";
-		};
-		016F95DC22B8C2590065A575 /* ContactEdit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ContactEdit;
-			sourceTree = "<group>";
-		};
 		016F95E122B8CF8B0065A575 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -732,8 +709,6 @@
 		017DBAF222B69C6400A63171 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				016F95DC22B8C2590065A575 /* ContactEdit */,
-				016F95DB22B8C2520065A575 /* ContactDetail */,
 				016F95DA22B8C2490065A575 /* ContactList */,
 				016F95D922B8C2430065A575 /* Model */,
 			);
@@ -823,7 +798,6 @@
 				017DBAF222B69C6400A63171 /* Tests */,
 				0190FE3522AEC055002A302E /* ContactsAppTests.swift */,
 				0190FE3722AEC055002A302E /* Info.plist */,
-				017DBB1522B808A700A63171 /* ContactListPresenterTest.swift */,
 			);
 			path = ContactsAppTests;
 			sourceTree = "<group>";
@@ -852,7 +826,6 @@
 			isa = PBXGroup;
 			children = (
 				015574A922B4F63F00A26DAD /* Tests */,
-				015574A822B4F63600A26DAD /* NetworkingTestSuite */,
 				0190FE6422AEC5B4002A302E /* Info.plist */,
 				0155749122B4DDF700A26DAD /* EndPoint.swift */,
 			);
@@ -1498,11 +1471,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				017DBB1622B808A700A63171 /* ContactListPresenterTest.swift in Sources */,
 				016F95E722B8EEA70065A575 /* ListMockView.swift in Sources */,
 				017DBAF422B69C8D00A63171 /* ContactModelTests.swift in Sources */,
 				016F95E022B8CEBB0065A575 /* NetworkManagerMock.swift in Sources */,
-				016F95EB22B8F7A50065A575 /* ContactDetailPresenterTest.swift in Sources */,
 				016F95D222B8B9A60065A575 /* MockModel.swift in Sources */,
 				016F95E322B8CFA30065A575 /* EndPointMock.swift in Sources */,
 				0190FE3622AEC055002A302E /* ContactsAppTests.swift in Sources */,
@@ -1547,6 +1518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0155749222B4DDF700A26DAD /* EndPoint.swift in Sources */,
+				016F95F122B975A00065A575 /* MockModel.swift in Sources */,
 				0190FE6322AEC5B4002A302E /* NetworkingTests.swift in Sources */,
 				017DBAF622B69DBD00A63171 /* AppConstants.swift in Sources */,
 			);

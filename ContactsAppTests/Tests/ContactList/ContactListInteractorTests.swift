@@ -11,7 +11,7 @@ import XCTest
 import RxSwift
 
 class ContactListInteractorTests: XCTestCase {
-
+    
     var presenter: ListMockPresenter!
     var sut: ContactListInteractable!
     
@@ -19,13 +19,13 @@ class ContactListInteractorTests: XCTestCase {
         sut = ContactListInteractor(NetworkManagerMock.shared)
         presenter = ListMockPresenter(interactor: sut)
     }
-
+    
     override func tearDown() {
         
         presenter = nil
         sut = nil
     }
-
+    
     func testLoadContactWithSuccess() {
         
         let expect = expectation(description: "Till interactor loads the contacts from mock network")
@@ -39,10 +39,10 @@ class ContactListInteractorTests: XCTestCase {
             
             XCTAssertTrue(self.presenter.isSuccess)
             XCTAssertFalse(self.presenter.isError)
-
+            
         }
     }
-
+    
     
     func testLoadContactWithFailure() {
         

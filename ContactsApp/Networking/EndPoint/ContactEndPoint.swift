@@ -10,9 +10,17 @@ import Foundation
 import Networking
 
 enum ContactEndPoint {
+    
+    ///Fetches [Contacts]
     case getContacts
+    
+    ///Fetches a Contact for id
     case getContact(Int)
+    
+    ///Adds a new Contact
     case addContact(Contact)
+    
+    ///Updates an existing Contact
     case updateContact(Contact)
 }
 
@@ -21,16 +29,12 @@ extension ContactEndPoint: EndPoint {
     var path: String {
         switch self{
             
-        ///Fetches [Contacts]
         case .getContacts: return "/contacts.json"
             
-        ///Fetches a Contact for id
         case .getContact(let contactId): return "/contacts/\(contactId).json"
             
-        ///Adds a new Contact
         case .addContact: return "/contacts.json"
             
-        ///Updates an existing Contact
         case .updateContact(let contact): return "/contacts/\(contact.id).json"
             
         }

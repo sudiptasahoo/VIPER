@@ -12,7 +12,7 @@ import RxSwift
 
 
 class ContactListPresenterTests: XCTestCase {
-
+    
     var sut: ContactListPresentable!
     var interactor: ContactListInteractable!
     var mockView: ListMockView!
@@ -24,14 +24,14 @@ class ContactListPresenterTests: XCTestCase {
         sut.contactListViewInterface = mockView
         mockView.presenter = sut
     }
-
+    
     override func tearDown() {
         
         sut = nil
         interactor = nil
         mockView = nil
     }
-
+    
     func testPresenterLoadContactsSuccess() {
         
         let expect = expectation(description: "Till Network Mock loads the contacts")
@@ -126,5 +126,5 @@ class ContactListPresenterTests: XCTestCase {
             XCTAssertEqual(self.mockView.presenter.getContact(at: IndexPath(item: 0, section: 0)), MockContact.shared.contact)
         }
     }
-
+    
 }
