@@ -9,6 +9,8 @@
 import UIKit
 
 protocol EditMetadataCellDelegate: class{
+    
+    ///Notifies as the user types the text
     func textChange(_ text: String?, mode: MetadataDisplayType)
 }
 
@@ -61,10 +63,20 @@ final class EditMetadataTableViewCell: UITableViewCell, CellThemeable, NibReusab
         default: fatalError("Invalid Metadata type has been sent to be rendered by EditMetadataTableViewCell")
         }
         
+        valueTextField.delegate = self
         valueTextField.addTarget(self, action: #selector(typingText), for: .editingChanged)
     }
     
     @objc func typingText(textField: UITextField) {
         delegate?.textChange(textField.text, mode: mode)
+    }
+}
+
+extension EditMetadataTableViewCell : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
     }
 }

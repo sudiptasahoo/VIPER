@@ -21,11 +21,13 @@ enum PageState{
     case normal
 }
 
+///Used for grouping sections in Details  screen
 enum DetailSection: Int, CaseIterable, RawRepresentable{
     case header
     case metadata
 }
 
+///Used for grouping Details and Edit screen rows
 enum MetadataDisplayType: Int, CaseIterable, RawRepresentable{
     case profileImage
     case firstName
@@ -34,11 +36,17 @@ enum MetadataDisplayType: Int, CaseIterable, RawRepresentable{
     case email
 }
 
+///Used to detect EDIT screen
 enum ContactEditMode{
+    
+    ///New contact
     case new
+    
+    ///Update existing contact
     case update
 }
 
+///Used to group rows in the EDIT screen
 enum MetadataType: Int, CaseIterable, RawRepresentable{
     
     case firstName
@@ -47,6 +55,8 @@ enum MetadataType: Int, CaseIterable, RawRepresentable{
     case email
 }
 
+
+///Form Validation errors
 enum FieldValidationError: String, Error, RawRepresentable, LocalizedError{
     case invalidEmail = "Please enter a valid Email Address"
     case invalidPhone = "Please enter a valid Phone no"
@@ -61,12 +71,14 @@ enum FieldValidationError: String, Error, RawRepresentable, LocalizedError{
 }
 
 
+///To convert any kind of error into APpError
 enum AppError: Error {
     
     ///Converts any error like NetworkError, etc into App Error
     case error(String)
 }
 
+//TODO: Convert network error and other error to this type
 extension AppError: LocalizedError {
     var localizedDescription: String {
         switch self {

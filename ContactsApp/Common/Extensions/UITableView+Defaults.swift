@@ -20,6 +20,7 @@ extension UITableView{
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.accessibilityIdentifier = "contact_table"
+        tableView.keyboardDismissMode = .onDrag
         
         return tableView
     }

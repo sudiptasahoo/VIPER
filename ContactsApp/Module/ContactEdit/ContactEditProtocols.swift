@@ -12,6 +12,8 @@ import RxSwift
 // Presenter -> View Interface
 protocol ContactEditViewInterface: class {
     var presenter: ContactEditPresentable? { get set }
+    
+    ///Some error ocurred while updating. Validation Error or Network Error
     func showUpdate(error: Error)
 }
 
@@ -20,13 +22,19 @@ protocol ContactEditPresentable: class {
     var interactor: ContactEditInteractable { get }
     var router: ContactEditRoutable { get }
     var sections: Int { get }
+    var contact: Contact? { get }
+    
+    ///Returns rows count for tableview
     func getNoOfRows(for section: Int) -> Int
+    
+    ///Returns display type for rendering UITableViewCell
     func getDisplayType(for indexPath: IndexPath) -> MetadataDisplayType
     
-    var contact: Contact? { get }
     
     ///For temporary storage of Edited Contact info
     var tempContact: Contact { get set }
+    
+    ///Updates the contact object by calling API
     func updateContact(contact: Contact) throws
     
     ///Notifies about the tasks happening in this module
@@ -35,7 +43,16 @@ protocol ContactEditPresentable: class {
 
 // MARK:- Interaction Protocol
 protocol ContactEditInteractable: ContactCRUDable {
-    func validateAndUpdate(_ contact: Contact, mode: ContactEditMode) throws -> Observable<Contact>
+    
+    /**Validates the contact fields
+     - throws VALIDATION Error
+     */
+    func validate(_ contact: Contact) throws
+    
+    /**Update or Add contact according to the mode
+     - parameter mode: Edit mode new or update
+    */
+    func update(_ contact: Contact, mode: ContactEditMode) -> Observable<Contact>
 }
 
 protocol ContactEditRoutable: class {

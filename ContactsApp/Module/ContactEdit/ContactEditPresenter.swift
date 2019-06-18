@@ -19,7 +19,7 @@ final class ContactEditPresenter: ContactEditPresentable {
     var inheritedTask: PublishSubject<Contact>?
     let interactor: ContactEditInteractable
     let router: ContactEditRoutable
-
+    
     init(interactor: ContactEditInteractable,
          router: ContactEditRoutable, contact: Contact?, mode: ContactEditMode, inheritedTask: PublishSubject<Contact>) {
         self.interactor = interactor
@@ -67,7 +67,9 @@ final class ContactEditPresenter: ContactEditPresentable {
     
     func updateContact(contact: Contact) throws {
         
-        try interactor.validateAndUpdate(contact, mode: mode)
+        try interactor.validate(contact)
+        
+        interactor.update(contact, mode: mode)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (contact: Contact) in

@@ -19,7 +19,7 @@ final class ContactEditInteractor: ContactEditInteractable{
         self.networking = networking
     }
     
-    func validateAndUpdate(_ contact: Contact, mode: ContactEditMode) throws -> Observable<Contact> {
+    func validate(_ contact: Contact) throws {
         
         guard let firstName = contact.firstName, !firstName.isEmpty else {throw FieldValidationError.emptyFirstname}
         guard let lastName = contact.lastName, !lastName.isEmpty else {throw FieldValidationError.emptyLastName}
@@ -30,6 +30,9 @@ final class ContactEditInteractor: ContactEditInteractable{
         guard lastName.isValidName else {throw FieldValidationError.invalidLastName}
         guard phoneNo.isValidPhone else {throw FieldValidationError.invalidPhone}
         guard email.isValidEmail else {throw FieldValidationError.invalidEmail}
+    }
+    
+    func update(_ contact: Contact, mode: ContactEditMode) -> Observable<Contact> {
         
         switch mode {
         case .new:
